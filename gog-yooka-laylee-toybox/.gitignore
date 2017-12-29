@@ -1,0 +1,9 @@
+# Blacklist:
+*
+
+# Whitelist:
+!.SRCINFO
+!.gitignore
+!PKGBUILD
+!gog-yooka-laylee-toybox
+!gog-yooka-laylee-toybox.desktop
