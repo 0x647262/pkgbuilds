@@ -1,0 +1,9 @@
+# Blacklist:
+*
+
+# Whitelist:
+!.gitignore
+!.SRCINFO
+!gog-jotun
+!gog-jotun.desktop
+!PKGBUILD
