@@ -1,0 +1,20 @@
+pkgbase = gog-dragonsphere
+	pkgdesc = Owned King Of Callahach! It's been twenty years since your father saved the world by entrapping the evil Sorcerer Sanwe. Now the spell is waning. Sanwe's malevolent force will soon consume the land, and only you can stop him.
+	pkgver = 2.0.0.2
+	pkgrel = 1
+	url = https://www.gog.com/game/dragonsphere
+	arch = i686
+	arch = x86_64
+	groups = games
+	groups = gog
+	license = custom
+	optdepends = firejail: Automatically sandbox this application from your OS
+	source = gog://gog_dragonsphere_2.0.0.2.sh
+	source = gog-dragonsphere.desktop
+	source = gog-dragonsphere
+	sha256sums = be0f2536655bf444c31c78767de171103d9b87ad9078b2fbb370416b1f7979ab
+	sha256sums = 765684a1ab55c678f3dce487330a84954b290e6f5b8894d712d24bdb810409b0
+	sha256sums = d18a17f83d1efcf85bcbf479081bccb0433f9891e8822d9ef90e606a0dfb0d20
+
+pkgname = gog-dragonsphere
+
