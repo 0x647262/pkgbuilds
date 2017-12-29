@@ -1,0 +1,16 @@
+pkgbase = libcs50
+	pkgdesc = Harvard's cs50 C library
+	pkgver = 8.0.5
+	pkgrel = 1
+	url = https://cs50.harvard.edu/
+	arch = i686
+	arch = x86_64
+	groups = cs50
+	license = unknown
+	provides = libcs50
+	conflicts = libcs50
+	source = libcs50-8.0.5.tar.gz::https://github.com/cs50/libcs50/archive/v8.0.5.tar.gz
+	sha256sums = 26a9feddc489285cb858328bc012c7aca1ffcab3b8410727b23e8c43a585fd04
+
+pkgname = libcs50
+
