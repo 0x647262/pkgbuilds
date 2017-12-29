@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=UNDERTALE
+Comment=UNDERTALE! The RPG game where you don't have to destroy anyone.
+Exec=gog-undertale
+Icon=gog-undertale
+Type=Application
+Terminal=false
+StartupNotify=true
+Categories=Game;AudioVideo;
+Encoding=UTF-8
