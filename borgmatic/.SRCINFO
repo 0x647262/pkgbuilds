@@ -1,0 +1,22 @@
+pkgbase = borgmatic
+	pkgdesc = A wrapper script for Borg backup software that creates and prunes backups
+	pkgver = 1.1.11
+	pkgrel = 2
+	url = https://torsion.org/borgmatic/
+	install = borgmatic.install
+	arch = any
+	license = GPL3
+	makedepends = git
+	makedepends = python-setuptools
+	makedepends = python-tox
+	depends = borg
+	depends = python-pykwalify
+	depends = python-ruamel-yaml
+	provides = borgmatic
+	source = git+https://projects.torsion.org/witten/borgmatic.git#commit=
+	source = borgmatic.install
+	sha256sums = SKIP
+	sha256sums = 2862763feea83e3ee0fb65c9f3fec648312486cd8ab48cd7cac70a7bb742b55b
+
+pkgname = borgmatic
+
