@@ -1,0 +1,38 @@
+pkgbase = nim-git
+	pkgver = 20180612
+	pkgrel = 1
+	arch = i686
+	arch = x86_64
+	groups = nim
+	makedepends = git
+	source = git+https://github.com/nim-lang/Nim
+	source = git+https://github.com/nim-lang/Nim.wiki
+	source = git+https://github.com/nim-lang/csources
+	source = git+https://github.com/nim-lang/nimble
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = nim-git
+	pkgdesc = Compiled, garbage-collected systems programming language which has an excellent productivity/performance ratio
+	url = https://github.com/nim-lang/Nim
+	license = MIT
+	provides = nim
+	conflicts = nim
+	options = !emptydirs
+
+pkgname = nimble-git
+	pkgdesc = Package manager for the Nim programming language
+	url = https://github.com/nim-lang/nimble
+	license = BSD
+	provides = nimble
+	conflicts = nimble
+
+pkgname = nimsuggest-git
+	pkgdesc = Tool for providing auto completion data for Nim source code
+	url = https://github.com/nim-lang/nimsuggest
+	license = MIT
+	provides = nimsuggest
+	conflicts = nimsuggest
+
