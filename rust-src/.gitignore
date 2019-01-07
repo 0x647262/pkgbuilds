@@ -1,7 +1,0 @@
-# Blacklist:
-*
-
-# Whitelist:
-!.SCRINFO
-!.gitignore
-!PKGBUILD

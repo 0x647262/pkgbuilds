@@ -1,9 +1,0 @@
-# Blacklist
-*
-
-# Whitelist
-!.gitignore
-!mono.binfmt.d
-!mono.install
-!PKGBUILD
-!.SRCINFO
