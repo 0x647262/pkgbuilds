@@ -3,8 +3,8 @@
 # Contributor: Jeremy Newton (Mystro256) <alexjnewt@gmail.com>
 
 pkgname=dolphin-emu
-pkgver=5.0.r18498.46b99671d9
-pkgrel=3
+pkgver=5.0.r19368.dadbeb4bae
+pkgrel=1
 epoch=1
 pkgdesc='A Gamecube / Wii / Triforce emulator'
 arch=(x86_64)
@@ -24,7 +24,7 @@ depends=(
   libevdev
   libfmt.so
   libgl
-  libmgba
+  #libmgba
   libminiupnpc.so
   libpulse
   libswscale.so
@@ -49,12 +49,13 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs)
-_commit=46b99671d9158e0ca840c1d8ef249db0f321ced7
+_commit=dadbeb4bae7e7fa23af2b46e0add4143094dc107
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=${_commit}
   git+https://github.com/mozilla/cubeb.git
   git+https://github.com/epezent/implot.git
   git+https://github.com/randy408/libspng.git
+  git+https://github.com/mgba-emu/mgba.git
   git+https://github.com/RetroAchievements/rcheevos.git
   git+https://github.com/arsenm/sanitizers-cmake.git
   git+https://github.com/KhronosGroup/SPIRV-Cross.git
@@ -69,11 +70,12 @@ b2sums=('SKIP'
         'SKIP'
         'SKIP'
         'SKIP'
+        'SKIP'
         'SKIP')
 
 prepare() {
   cd dolphin-emu
-  for submodule in Externals/{cubeb/cubeb,implot/implot,libspng/libspng,spirv_cross/SPIRV-Cross,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
+  for submodule in Externals/{cubeb/cubeb,implot/implot,libspng/libspng,mGBA/mgba,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
     git submodule init ${submodule}
     git config submodule.${submodule}.url ../${submodule##*/}
     git -c protocol.file.allow=always submodule update ${submodule}
