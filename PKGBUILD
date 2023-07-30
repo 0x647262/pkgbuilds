@@ -5,7 +5,7 @@
 
 pkgname=neovim
 pkgver=0.9.1
-pkgrel=2
+pkgrel=3
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=('x86_64')
 url='https://neovim.io'
@@ -23,7 +23,7 @@ sha512sums=('339efd3d8c1a73aa3b43e8770d6943aeba9e4ce6a3598c0424e388f80759d50b14a
 
 build() {
   cd ${pkgname}-${pkgver}
-  make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr
+  make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr USE_BUNDLED=OFF USE_BUNDLED_TS_PARSERS=ON
 }
 
 check() {
@@ -50,4 +50,4 @@ package() {
   echo "set runtimepath+=/usr/share/vim/vimfiles" > "${pkgdir}"/usr/share/nvim/archlinux.vim
 }
 
-# vim:set ft=sh sw=2 sts=2 et:
+# vim:set sw=2 sts=2 et:
