@@ -23,7 +23,13 @@ sha512sums=('f12ae48c82c4a3622e464a23966cb06e9da1a7cd000b4efeb8408bb55e189ffeb4e
 
 build() {
   cd ${pkgname}-${pkgver}
-  make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr USE_BUNDLED=OFF USE_BUNDLED_TS_PARSERS=ON
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DUSE_BUNDLED=OFF \
+    -W no-dev
+  cmake --build build --verbose
 }
 
 check() {
