@@ -4,7 +4,7 @@
 
 pkgname=dolphin-emu
 pkgver=5.0.r19870.032c77b462
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc='A Gamecube / Wii / Triforce emulator'
 arch=(x86_64)
@@ -95,6 +95,8 @@ pkgver() {
 }
 
 build() {
+  # Fix crash (FS#78628)
+  export CXXFLAGS="${CXXFLAGS/-O2/-O1}"
   cmake -S dolphin-emu -B build -G Ninja \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
