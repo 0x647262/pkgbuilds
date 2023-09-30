@@ -1,7 +1,7 @@
 pkgbase = dolphin-emu
 	pkgdesc = A Gamecube / Wii / Triforce emulator
 	pkgver = 5.0.r19870.032c77b462
-	pkgrel = 2
+	pkgrel = 3
 	epoch = 1
 	url = https://dolphin-emu.org
 	arch = x86_64
@@ -41,6 +41,7 @@ pkgbase = dolphin-emu
 	depends = zlib
 	optdepends = pulseaudio: PulseAudio backend
 	options = !emptydirs
+	options = !lto
 	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=032c77b462a220016f23c5079e71bb23e0ad2adf
 	source = git+https://github.com/mozilla/cubeb.git
 	source = git+https://github.com/epezent/implot.git
