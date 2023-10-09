@@ -4,7 +4,7 @@
 # Contributor: Florian Hahn <flo@fhahn.com>
 
 pkgname=neovim
-pkgver=0.9.2
+pkgver=0.9.4
 pkgrel=1
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=('x86_64')
@@ -19,7 +19,8 @@ optdepends=('python-pynvim: for Python plugin support (see :help python)'
             'xsel: for clipboard support on X11 (or xclip) (see :help clipboard)'
             'wl-clipboard: for clipboard support on wayland (see :help clipboard)')
 source=("https://github.com/neovim/neovim/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz")
-sha512sums=('f12ae48c82c4a3622e464a23966cb06e9da1a7cd000b4efeb8408bb55e189ffeb4ece99e9488244c16f7de70356303e4dc964afd70ab24d23a5e07c59e902ed9')
+sha512sums=('a9bac18aeecd99dfeab79b367c3f0c46003b95d057edb6fd18ba178d6b6f22434689508d0bfe91b2f771ef0a23a4888815e8c4001abb76f2a60357bab0cd7004')
+b2sums=('f98b9737df537be9a6f9bfba0e48f47f33cacdf5aa5f9fb3b47a693ea9fa5fbe32aa8628403fdb136b625ccad30c8aad1c25abe280384515df603e92d9ed898a')
 
 build() {
   cd ${pkgname}-${pkgver}
