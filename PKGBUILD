@@ -5,7 +5,7 @@
 
 pkgname=neovim
 pkgver=0.9.4
-pkgrel=1
+pkgrel=2
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=('x86_64')
 url='https://neovim.io'
@@ -18,9 +18,12 @@ optdepends=('python-pynvim: for Python plugin support (see :help python)'
             'xclip: for clipboard support on X11 (or xsel) (see :help clipboard)'
             'xsel: for clipboard support on X11 (or xclip) (see :help clipboard)'
             'wl-clipboard: for clipboard support on wayland (see :help clipboard)')
-source=("https://github.com/neovim/neovim/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz")
-sha512sums=('a9bac18aeecd99dfeab79b367c3f0c46003b95d057edb6fd18ba178d6b6f22434689508d0bfe91b2f771ef0a23a4888815e8c4001abb76f2a60357bab0cd7004')
-b2sums=('f98b9737df537be9a6f9bfba0e48f47f33cacdf5aa5f9fb3b47a693ea9fa5fbe32aa8628403fdb136b625ccad30c8aad1c25abe280384515df603e92d9ed898a')
+source=("https://github.com/neovim/neovim/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz"
+        nvimdoc.hook) # see FS#79707 and FS#51591
+sha512sums=('a9bac18aeecd99dfeab79b367c3f0c46003b95d057edb6fd18ba178d6b6f22434689508d0bfe91b2f771ef0a23a4888815e8c4001abb76f2a60357bab0cd7004'
+            '9629cb02843e1479fbed8598df62683d50566da91590a9a140156a058a4fe6fc588bc1c232770c65001834cb1f7d51a8eb7f41d69f7beae6ddb25c75a3abaaa1')
+b2sums=('f98b9737df537be9a6f9bfba0e48f47f33cacdf5aa5f9fb3b47a693ea9fa5fbe32aa8628403fdb136b625ccad30c8aad1c25abe280384515df603e92d9ed898a'
+        '1ae4632006af736e56430a71e2169d06f9bdfab6814b1de834dd622756e83374b9997488e20120697f353f6736ee23db68aef76954cf30eb1cfa5513664649cf')
 
 build() {
   cd ${pkgname}-${pkgver}
@@ -40,6 +43,8 @@ check() {
 }
 
 package() {
+  install -Dm0644 -t "$pkgdir/usr/share/libalpm/hooks/" "$srcdir/nvimdoc.hook"
+
   cd ${pkgname}-${pkgver}
   DESTDIR="$pkgdir" cmake --install build
 
