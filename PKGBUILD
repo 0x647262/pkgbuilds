@@ -8,7 +8,7 @@ pkgname=(
   dolphin-emu-tool
 )
 pkgver=5.0.r20347.dc0814ae46
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -40,7 +40,6 @@ depends=(
   libx11
   libxi
   libxrandr
-  libxxhash.so
   lzo
   mbedtls2
   #minizip-ng
