@@ -18,6 +18,13 @@ depends=(
   'luajit'
   'msgpack-c'
   'tree-sitter'
+  'tree-sitter-bash'
+  'tree-sitter-c'
+  'tree-sitter-lua'
+  'tree-sitter-markdown'
+  'tree-sitter-python'
+  'tree-sitter-query'
+  'tree-sitter-vimdoc'
   'unibilium'
 )
 makedepends=('cmake' 'git' 'ninja' 'lua51-mpack' 'lua51-lpeg' 'unzip')
@@ -68,6 +75,11 @@ package() {
   install -Dm644 runtime/nvim.desktop -t "${pkgdir}/usr/share/applications/"
   install -Dm644 runtime/nvim.appdata.xml -t "${pkgdir}/usr/share/metainfo/"
   install -Dm644 runtime/nvim.png -t "${pkgdir}/usr/share/pixmaps/"
+
+  install -d "${pkgdir}/usr/lib/nvim/parser"
+  for parser in bash c lua markdown markdown-inline python query vimdoc; do
+    ln -s ../../libtree-sitter-${parser}.so "${pkgdir}"/usr/lib/nvim/parser/${parser/-/_}.so
+  done
 
   # Make Arch Vim packages work
   mkdir -p "${pkgdir}"/etc/xdg/nvim
