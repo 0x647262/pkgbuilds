@@ -1,7 +1,7 @@
 pkgbase = neovim
 	pkgdesc = Fork of Vim aiming to improve user experience, plugins, and GUIs
 	pkgver = 0.9.5
-	pkgrel = 3
+	pkgrel = 4
 	url = https://neovim.io
 	arch = x86_64
 	license = custom:neovim
@@ -23,6 +23,7 @@ pkgbase = neovim
 	depends = tree-sitter-lua
 	depends = tree-sitter-markdown
 	depends = tree-sitter-python
+	depends = tree-sitter-query
 	depends = tree-sitter-vimdoc
 	depends = unibilium
 	optdepends = python-pynvim: for Python plugin support (see :help python)
