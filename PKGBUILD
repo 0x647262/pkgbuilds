@@ -5,7 +5,7 @@
 
 pkgname=neovim
 pkgver=0.9.5
-pkgrel=2
+pkgrel=3
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=('x86_64')
 url='https://neovim.io'
@@ -23,7 +23,7 @@ depends=(
   'tree-sitter-lua'
   'tree-sitter-markdown'
   'tree-sitter-python'
-  'tree-sitter-query'
+  #'tree-sitter-query'
   'tree-sitter-vimdoc'
   'unibilium'
 )
@@ -71,15 +71,14 @@ package() {
   cd ${pkgname}-${pkgver}
   DESTDIR="$pkgdir" cmake --install build
 
+  # Tree-sitter grammars are packaged separately and installed into
+  # /usr/lib/tree_sitter.
+  ln -s /usr/lib/tree_sitter "$pkgdir"/usr/share/nvim/runtime/parser
+
   install -Dm644 LICENSE.txt -t "${pkgdir}/usr/share/licenses/${pkgname}/"
   install -Dm644 runtime/nvim.desktop -t "${pkgdir}/usr/share/applications/"
   install -Dm644 runtime/nvim.appdata.xml -t "${pkgdir}/usr/share/metainfo/"
   install -Dm644 runtime/nvim.png -t "${pkgdir}/usr/share/pixmaps/"
-
-  install -d "${pkgdir}/usr/lib/nvim/parser"
-  for parser in bash c lua markdown markdown-inline python query vimdoc; do
-    ln -s ../../libtree-sitter-${parser}.so "${pkgdir}"/usr/lib/nvim/parser/${parser/-/_}.so
-  done
 
   # Make Arch Vim packages work
   mkdir -p "${pkgdir}"/etc/xdg/nvim
