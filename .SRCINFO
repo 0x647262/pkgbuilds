@@ -1,5 +1,5 @@
 pkgbase = dolphin-emu
-	pkgdesc = A Gamecube / Wii / Triforce emulator
+	pkgdesc = A Gamecube and Wii emulator
 	pkgver = 5.0.r21264.1efda863e4
 	pkgrel = 1
 	epoch = 1
