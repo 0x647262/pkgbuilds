@@ -1,0 +1,7 @@
+*.gz
+*.patch
+*.sig
+*.sign
+src
+*.xz
+*.zst
