@@ -1,0 +1,27 @@
+diff --git a/Source/Core/InputCommon/CMakeLists.txt b/Source/Core/InputCommon/CMakeLists.txt
+index 0343717a34..47948af638 100644
+--- a/Source/Core/InputCommon/CMakeLists.txt
++++ b/Source/Core/InputCommon/CMakeLists.txt
+@@ -187,12 +187,14 @@ if(MSVC)
+   target_link_libraries(inputcommon PRIVATE use_pch)
+ endif()
+ 
+-if(TARGET Hidapi::Hidapi)
+-  target_sources(inputcommon
+-  PRIVATE
+-    ControllerInterface/SteamDeck/SteamDeck.cpp
+-    ControllerInterface/SteamDeck/SteamDeck.h
+-  )
+-  target_link_libraries(inputcommon PUBLIC Hidapi::Hidapi)
+-  target_compile_definitions(inputcommon PRIVATE -DHAVE_HIDAPI=1)
++if (STEAMOS)
++	if(TARGET Hidapi::Hidapi)
++		target_sources(inputcommon
++		PRIVATE
++			ControllerInterface/SteamDeck/SteamDeck.cpp
++			ControllerInterface/SteamDeck/SteamDeck.h
++		)
++		target_link_libraries(inputcommon PUBLIC Hidapi::Hidapi)
++		target_compile_definitions(inputcommon PRIVATE -DHAVE_HIDAPI=1)
++  endif()
+ endif()
