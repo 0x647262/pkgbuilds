@@ -4,57 +4,57 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 # Contributor: Andreas Radke <andyrtr@archlinux.org>
 
-pkgbase=mesa
+pkgbase=lib32-mesa
 pkgname=(
-  'vulkan-mesa-layers'
-  'opencl-clover-mesa'
-  'opencl-rusticl-mesa'
-  'vulkan-intel'
-  'vulkan-nouveau'
-  'vulkan-radeon'
-  'vulkan-swrast'
-  'vulkan-virtio'
-  'libva-mesa-driver'
-  'mesa-vdpau'
-  'mesa'
+  'lib32-vulkan-mesa-layers'
+  'lib32-opencl-clover-mesa'
+  'lib32-opencl-rusticl-mesa'
+  'lib32-vulkan-intel'
+  'lib32-vulkan-nouveau'
+  'lib32-vulkan-radeon'
+  'lib32-vulkan-swrast'
+  'lib32-vulkan-virtio'
+  'lib32-libva-mesa-driver'
+  'lib32-mesa-vdpau'
+  'lib32-mesa'
 )
 pkgver=24.0.6
 pkgrel=2
 epoch=1
-pkgdesc="Open-source OpenGL drivers"
+pkgdesc="Open-source OpenGL drivers - 32-bit"
 url="https://www.mesa3d.org/"
 arch=('x86_64')
 license=('MIT AND BSD-3-Clause AND SGI-B-2.0')
 makedepends=(
-  'clang'
-  'expat'
-  'gcc-libs'
-  'glibc'
-  'libdrm'
-  'libelf'
-  'libglvnd'
-  'libva'
-  'libvdpau'
-  'libx11'
-  'libxcb'
-  'libxext'
-  'libxfixes'
-  'libxml2'
-  'libxrandr'
-  'libxshmfence'
-  'libxxf86vm'
-  'llvm'
-  'llvm-libs'
-  'lm_sensors'
-  'rust'
-  'spirv-llvm-translator'
-  'spirv-tools'
-  'systemd-libs'
-  'vulkan-icd-loader'
-  'wayland'
-  'xcb-util-keysyms'
-  'zlib'
-  'zstd'
+  'lib32-clang'
+  'lib32-expat'
+  'lib32-gcc-libs'
+  'lib32-glibc'
+  'lib32-libdrm'
+  'lib32-libelf'
+  'lib32-libglvnd'
+  'lib32-libva'
+  'lib32-libvdpau'
+  'lib32-libx11'
+  'lib32-libxcb'
+  'lib32-libxext'
+  'lib32-libxfixes'
+  'lib32-libxml2'
+  'lib32-libxrandr'
+  'lib32-libxshmfence'
+  'lib32-libxxf86vm'
+  'lib32-llvm'
+  'lib32-llvm-libs'
+  'lib32-lm_sensors'
+  'lib32-rust-libs'
+  'lib32-spirv-llvm-translator'
+  'lib32-spirv-tools'
+  'lib32-systemd'
+  'lib32-vulkan-icd-loader'
+  'lib32-wayland'
+  'lib32-xcb-util-keysyms'
+  'lib32-zlib'
+  'lib32-zstd'
 
   # shared between mesa and lib32-mesa
   'clang'
@@ -69,15 +69,6 @@ makedepends=(
   'rust-bindgen'
   'wayland-protocols'
   'xorgproto'
-
-  # valgrind deps
-  'valgrind'
-
-  # d3d12 deps
-  'directx-headers'
-
-  # gallium-omx deps
-  'libomxil-bellagio'
 )
 source=(
   https://mesa.freedesktop.org/archive/mesa-${pkgver}.tar.xz{,.sig}
@@ -127,14 +118,15 @@ prepare() {
 
 build() {
   local meson_options=(
+    --cross-file lib32
     -D android-libbacktrace=disabled
     -D b_ndebug=true
     -D dri3=enabled
     -D egl=enabled
-    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast,i915,iris,crocus,zink,d3d12
+    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast,i915,iris,crocus,zink
     -D gallium-extra-hud=true
     -D gallium-nine=true
-    -D gallium-omx=bellagio
+    -D gallium-omx=disabled
     -D gallium-opencl=icd
     -D gallium-rusticl=true
     -D gallium-va=enabled
@@ -153,7 +145,7 @@ build() {
     -D osmesa=true
     -D platforms=x11,wayland
     -D shared-glapi=enabled
-    -D valgrind=enabled
+    -D valgrind=disabled
     -D video-codecs=all
     -D vulkan-drivers=amd,intel,intel_hasvk,swrast,virtio,nouveau-experimental
     -D vulkan-layers=device-select,intel-nullhw,overlay
@@ -165,6 +157,8 @@ build() {
 
   # Inject subproject packages
   export MESON_PACKAGE_CACHE_DIR="$srcdir"
+
+  export BINDGEN_EXTRA_CLANG_ARGS="-m32"
 
   arch-meson mesa-$pkgver build "${meson_options[@]}"
   meson configure build # Print config
@@ -185,106 +179,108 @@ _install() {
   done
 }
 
-_libdir=usr/lib
+_libdir=usr/lib32
 
-package_vulkan-mesa-layers() {
-  pkgdesc="Mesa's Vulkan layers"
+package_lib32-vulkan-mesa-layers() {
+  pkgdesc="Mesa's Vulkan layers - 32-bit"
   depends=(
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libxcb'
-    'wayland'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libxcb'
+    'lib32-wayland'
 
-    'python'
+    'vulkan-mesa-layers'
   )
-  conflicts=('vulkan-mesa-layer')
-  replaces=('vulkan-mesa-layer')
+  conflicts=('lib32-vulkan-mesa-layer')
+  replaces=('lib32-vulkan-mesa-layer')
 
-  _install fakeinstall/usr/share/vulkan/explicit_layer.d
-  _install fakeinstall/usr/share/vulkan/implicit_layer.d
+  rm -rv fakeinstall/usr/share/vulkan/explicit_layer.d
+  rm -rv fakeinstall/usr/share/vulkan/implicit_layer.d
   _install fakeinstall/$_libdir/libVkLayer_*.so
-  _install fakeinstall/usr/bin/mesa-overlay-control.py
+  rm -v fakeinstall/usr/bin/mesa-overlay-control.py
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_opencl-clover-mesa() {
-  pkgdesc="Open-source OpenCL drivers - Clover variant"
+package_lib32-opencl-clover-mesa() {
+  pkgdesc="Open-source OpenCL drivers - Clover variant - 32-bit"
   depends=(
-    'clang'
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libelf'
-    'llvm-libs'
-    'spirv-llvm-translator'
-    'spirv-tools'
-    'zlib'
-    'zstd'
+    'lib32-clang'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libelf'
+    'lib32-llvm-libs'
+    'lib32-spirv-llvm-translator'
+    'lib32-spirv-tools'
+    'lib32-zlib'
+    'lib32-zstd'
 
-    'libclc'
+    'opencl-clover-mesa'
   )
   optdepends=('opencl-headers: headers necessary for OpenCL development')
-  provides=('opencl-driver')
-  replaces=("opencl-mesa<=23.1.4-1")
-  conflicts=('opencl-mesa')
+  provides=('lib32-opencl-driver')
+  replaces=("lib32-opencl-mesa<=23.1.4-1")
+  conflicts=('lib32-opencl-mesa')
 
-  _install fakeinstall/etc/OpenCL/vendors/mesa.icd
+  rm -v fakeinstall/etc/OpenCL/vendors/mesa.icd
   _install fakeinstall/$_libdir/libMesaOpenCL*
   _install fakeinstall/$_libdir/gallium-pipe
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_opencl-rusticl-mesa() {
-  pkgdesc="Open-source OpenCL drivers - RustICL variant"
+package_lib32-opencl-rusticl-mesa() {
+  pkgdesc="Open-source OpenCL drivers - RustICL variant - 32-bit"
   depends=(
-    'clang'
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libelf'
-    'llvm-libs'
-    'spirv-llvm-translator'
-    'spirv-tools'
-    'zlib'
-    'zstd'
+    'lib32-clang'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libelf'
+    'lib32-llvm-libs'
+    'lib32-spirv-llvm-translator'
+    'lib32-spirv-tools'
+    'lib32-zlib'
+    'lib32-zstd'
 
-    'libclc'
+    'opencl-rusticl-mesa'
   )
   optdepends=('opencl-headers: headers necessary for OpenCL development')
-  provides=('opencl-driver')
-  replaces=("opencl-mesa<=23.1.4-1")
-  conflicts=('opencl-mesa')
+  provides=('lib32-opencl-driver')
+  replaces=("lib32-opencl-mesa<=23.1.4-1")
+  conflicts=('lib32-opencl-mesa')
 
-  _install fakeinstall/etc/OpenCL/vendors/rusticl.icd
+  rm -v fakeinstall/etc/OpenCL/vendors/rusticl.icd
   _install fakeinstall/$_libdir/libRusticlOpenCL*
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_vulkan-intel() {
-  pkgdesc="Open-source Vulkan driver for Intel GPUs"
+package_lib32-vulkan-intel() {
+  pkgdesc="Open-source Vulkan driver for Intel GPUs - 32-bit"
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libx11'
-    'libxcb'
-    'libxshmfence'
-    'systemd-libs'
-    'vulkan-icd-loader'
-    'wayland'
-    'xcb-util-keysyms'
-    'zlib'
-    'zstd'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxshmfence'
+    'lib32-systemd'
+    'lib32-vulkan-icd-loader'
+    'lib32-wayland'
+    'lib32-xcb-util-keysyms'
+    'lib32-zlib'
+    'lib32-zstd'
+
+    'vulkan-intel'
   )
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  provides=('vulkan-driver')
+  optdepends=('lib32-vulkan-mesa-layers: additional vulkan layers')
+  provides=('lib32-vulkan-driver')
 
   _install fakeinstall/usr/share/vulkan/icd.d/intel_*.json
   _install fakeinstall/$_libdir/libvulkan_intel*.so
@@ -292,25 +288,27 @@ package_vulkan-intel() {
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_vulkan-nouveau() {
-  pkgdesc="Open-source Vulkan driver for Nvidia GPUs"
+package_lib32-vulkan-nouveau() {
+  pkgdesc="Open-source Vulkan driver for Nvidia GPUs - 32-bit"
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libx11'
-    'libxcb'
-    'libxshmfence'
-    'systemd-libs'
-    'vulkan-icd-loader'
-    'wayland'
-    'xcb-util-keysyms'
-    'zlib'
-    'zstd'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxshmfence'
+    'lib32-systemd'
+    'lib32-vulkan-icd-loader'
+    'lib32-wayland'
+    'lib32-xcb-util-keysyms'
+    'lib32-zlib'
+    'lib32-zstd'
+
+    'vulkan-nouveau'
   )
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  provides=('vulkan-driver')
+  optdepends=('lib32-vulkan-mesa-layers: additional vulkan layers')
+  provides=('lib32-vulkan-driver')
 
   _install fakeinstall/usr/share/vulkan/icd.d/nouveau_*.json
   _install fakeinstall/$_libdir/libvulkan_nouveau*.so
@@ -318,57 +316,61 @@ package_vulkan-nouveau() {
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_vulkan-radeon() {
-  pkgdesc="Open-source Vulkan driver for AMD GPUs"
+package_lib32-vulkan-radeon() {
+  pkgdesc="Open-source Vulkan driver for AMD GPUs - 32-bit"
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libelf'
-    'libx11'
-    'libxcb'
-    'libxshmfence'
-    'llvm-libs'
-    'systemd-libs'
-    'vulkan-icd-loader'
-    'wayland'
-    'xcb-util-keysyms'
-    'zlib'
-    'zstd'
-  )
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  provides=('vulkan-driver')
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libelf'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxshmfence'
+    'lib32-llvm-libs'
+    'lib32-systemd'
+    'lib32-vulkan-icd-loader'
+    'lib32-wayland'
+    'lib32-xcb-util-keysyms'
+    'lib32-zlib'
+    'lib32-zstd'
 
-  _install fakeinstall/usr/share/drirc.d/00-radv-defaults.conf
+    'vulkan-radeon'
+  )
+  optdepends=('lib32-vulkan-mesa-layers: additional vulkan layers')
+  provides=('lib32-vulkan-driver')
+
+  rm -v fakeinstall/usr/share/drirc.d/00-radv-defaults.conf
   _install fakeinstall/usr/share/vulkan/icd.d/radeon_icd*.json
   _install fakeinstall/$_libdir/libvulkan_radeon.so
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_vulkan-swrast() {
-  pkgdesc="Open-source Vulkan driver for CPUs (Software Rasterizer)"
+package_lib32-vulkan-swrast() {
+  pkgdesc="Open-source Vulkan driver for CPUs (Software Rasterizer) - 32-bit"
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libx11'
-    'libxcb'
-    'libxshmfence'
-    'llvm-libs'
-    'systemd-libs'
-    'vulkan-icd-loader'
-    'wayland'
-    'xcb-util-keysyms'
-    'zlib'
-    'zstd'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxshmfence'
+    'lib32-llvm-libs'
+    'lib32-systemd'
+    'lib32-vulkan-icd-loader'
+    'lib32-wayland'
+    'lib32-xcb-util-keysyms'
+    'lib32-zlib'
+    'lib32-zstd'
+
+    'vulkan-swrast'
   )
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  conflicts=('vulkan-mesa')
-  replaces=('vulkan-mesa')
-  provides=('vulkan-driver')
+  optdepends=('lib32-vulkan-mesa-layers: additional vulkan layers')
+  conflicts=('lib32-vulkan-mesa')
+  replaces=('lib32-vulkan-mesa')
+  provides=('lib32-vulkan-driver')
 
   _install fakeinstall/usr/share/vulkan/icd.d/lvp_icd*.json
   _install fakeinstall/$_libdir/libvulkan_lvp.so
@@ -376,25 +378,27 @@ package_vulkan-swrast() {
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_vulkan-virtio() {
-  pkgdesc="Open-source Vulkan driver for Virtio-GPU (Venus)"
+package_lib32-vulkan-virtio() {
+  pkgdesc="Open-source Vulkan driver for Virtio-GPU (Venus) - 32-bit"
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libx11'
-    'libxcb'
-    'libxshmfence'
-    'systemd-libs'
-    'vulkan-icd-loader'
-    'wayland'
-    'xcb-util-keysyms'
-    'zlib'
-    'zstd'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxshmfence'
+    'lib32-systemd'
+    'lib32-vulkan-icd-loader'
+    'lib32-wayland'
+    'lib32-xcb-util-keysyms'
+    'lib32-zlib'
+    'lib32-zstd'
+
+    'vulkan-virtio'
   )
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  provides=('vulkan-driver')
+  optdepends=('lib32-vulkan-mesa-layers: additional vulkan layers')
+  provides=('lib32-vulkan-driver')
 
   _install fakeinstall/usr/share/vulkan/icd.d/virtio_icd*.json
   _install fakeinstall/$_libdir/libvulkan_virtio.so
@@ -402,95 +406,98 @@ package_vulkan-virtio() {
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_libva-mesa-driver() {
-  pkgdesc="Open-source VA-API drivers"
+package_lib32-libva-mesa-driver() {
+  pkgdesc="Open-source VA-API drivers - 32-bit"
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libelf'
-    'libx11'
-    'libxcb'
-    'libxshmfence'
-    'llvm-libs'
-    'zlib'
-    'zstd'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libelf'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxshmfence'
+    'lib32-llvm-libs'
+    'lib32-zlib'
+    'lib32-zstd'
+
+    'libva-mesa-driver'
   )
-  provides=('libva-driver')
+  provides=('lib32-libva-driver')
 
   _install fakeinstall/$_libdir/dri/*_drv_video.so
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_mesa-vdpau() {
-  pkgdesc="Open-source VDPAU drivers"
+package_lib32-mesa-vdpau() {
+  pkgdesc="Open-source VDPAU drivers - 32-bit"
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libelf'
-    'libx11'
-    'libxcb'
-    'libxshmfence'
-    'llvm-libs'
-    'zlib'
-    'zstd'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libelf'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxshmfence'
+    'lib32-llvm-libs'
+    'lib32-zlib'
+    'lib32-zstd'
+
+    'mesa-vdpau'
   )
-  provides=('vdpau-driver')
+  provides=('lib32-vdpau-driver')
 
   _install fakeinstall/$_libdir/vdpau
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_mesa() {
+package_lib32-mesa() {
   depends=(
-    'expat'
-    'gcc-libs'
-    'glibc'
-    'libdrm'
-    'libelf'
-    'libglvnd'
-    'libx11'
-    'libxcb'
-    'libxext'
-    'libxfixes'
-    'libxshmfence'
-    'libxxf86vm'
-    'llvm-libs'
-    'lm_sensors'
-    'wayland'
-    'zlib'
-    'zstd'
+    'lib32-expat'
+    'lib32-gcc-libs'
+    'lib32-glibc'
+    'lib32-libdrm'
+    'lib32-libelf'
+    'lib32-libglvnd'
+    'lib32-libx11'
+    'lib32-libxcb'
+    'lib32-libxext'
+    'lib32-libxfixes'
+    'lib32-libxshmfence'
+    'lib32-libxxf86vm'
+    'lib32-llvm-libs'
+    'lib32-lm_sensors'
+    'lib32-wayland'
+    'lib32-zlib'
+    'lib32-zstd'
 
-    'libomxil-bellagio'
+    'mesa'
   )
   optdepends=(
     'opengl-man-pages: for the OpenGL API man pages'
   )
   provides=(
-    'mesa-libgl'
-    'opengl-driver'
+    'lib32-mesa-libgl'
+    'lib32-opengl-driver'
   )
-  conflicts=('mesa-libgl')
-  replaces=('mesa-libgl')
+  conflicts=('lib32-mesa-libgl')
+  replaces=('lib32-mesa-libgl')
 
-  _install fakeinstall/usr/share/drirc.d/00-mesa-defaults.conf
-  _install fakeinstall/usr/share/glvnd/egl_vendor.d/50_mesa.json
+  rm -v fakeinstall/usr/share/drirc.d/00-mesa-defaults.conf
+  rm -v fakeinstall/usr/share/glvnd/egl_vendor.d/50_mesa.json
 
   # ati-dri, nouveau-dri, intel-dri, svga-dri, swrast, swr
   _install fakeinstall/$_libdir/dri/*_dri.so
 
-  _install fakeinstall/$_libdir/bellagio
   _install fakeinstall/$_libdir/d3d
   _install fakeinstall/$_libdir/lib{gbm,glapi}.so*
   _install fakeinstall/$_libdir/libOSMesa.so*
   _install fakeinstall/$_libdir/libxatracker.so*
 
-  _install fakeinstall/usr/include
+  rm -rv fakeinstall/usr/include
   _install fakeinstall/$_libdir/pkgconfig
 
   # libglvnd support
