@@ -1,11 +1,12 @@
 # Maintainer: Sven-Hendrik Haase <svenstaro@archlinux.org>
 # Maintainer: Caleb Maclennan <caleb@alerque.com>
+# Maintainer: Daniel M. Capella <polyzen@archlinux.org>
 # Contributor: Florian Walch <florian+aur@fwalch.com>
 # Contributor: Florian Hahn <flo@fhahn.com>
 
 pkgname=neovim
 pkgver=0.9.5
-pkgrel=5
+pkgrel=6
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=('x86_64')
 url='https://neovim.io'
@@ -18,18 +19,18 @@ depends=(
   'luajit'
   'msgpack-c'
   'tree-sitter'
-  'tree-sitter-bash'
-  'tree-sitter-c'
-  'tree-sitter-lua'
-  'tree-sitter-markdown'
-  'tree-sitter-python'
-  'tree-sitter-query'
-  'tree-sitter-vimdoc'
   'unibilium'
 )
 makedepends=('cmake' 'git' 'ninja' 'lua51-mpack' 'lua51-lpeg' 'unzip')
 optdepends=(
   'python-pynvim: for Python plugin support (see :help python)'
+  'tree-sitter-bash: for the Bash grammar for tree-sitter'
+  'tree-sitter-c: for the C grammar for tree-sitter'
+  'tree-sitter-lua: for the Lua grammar for tree-sitter'
+  'tree-sitter-markdown: for the Markdown grammar for tree-sitter (requires query files from the nvim-treesitter plugin)'
+  'tree-sitter-python: for the Python grammar for tree-sitter (requires query files from the nvim-treesitter plugin)'
+  'tree-sitter-query: for the TS query grammar for tree-sitter'
+  'tree-sitter-vimdoc: for the Vim help file grammar for tree-sitter'
   'xclip: for clipboard support on X11 (or xsel) (see :help clipboard)'
   'xsel: for clipboard support on X11 (or xclip) (see :help clipboard)'
   'wl-clipboard: for clipboard support on wayland (see :help clipboard)'
