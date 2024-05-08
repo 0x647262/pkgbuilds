@@ -16,7 +16,7 @@ pkgbase = dolphin-emu
 	optdepends = pulseaudio: PulseAudio backend
 	options = !emptydirs
 	options = !lto
-	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=b6f0e8876e40a41941f0fb6cef89cf49c91edb56
+	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=57c890d4fcec1b86d71a8a5ad9c51c548a7bd9cd
 	source = git+https://github.com/arsenm/sanitizers-cmake.git
 	source = git+https://github.com/curl/curl.git
 	source = git+https://github.com/Cyan4973/xxHash.git
