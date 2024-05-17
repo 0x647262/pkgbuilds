@@ -13,7 +13,6 @@ url='https://neovim.io'
 license=('custom:neovim')
 depends=(
   'libluv'
-  'libtermkey'
   'libuv'
   'libvterm>0.1.4'
   'lua51-lpeg'
