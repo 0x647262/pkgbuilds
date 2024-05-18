@@ -1,5 +1,0 @@
-[neovim]
-source = "github"
-github = "neovim/neovim"
-prefix = "v"
-use_max_tag = true
