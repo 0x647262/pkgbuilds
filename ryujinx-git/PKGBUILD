@@ -1,9 +1,9 @@
 # shellcheck disable=SC2034,SC2154,SC2164
 
-_sdkver='8.0.204'
+_sdkver='8.0.300'
 
 pkgname='ryujinx-git'
-pkgver=1.1.1298.r0.ga23d8cb
+pkgver=1.1.1316.r0.g2f427de
 pkgrel=1
 pkgdesc="Experimental Nintendo Switch Emulator written in C#"
 arch=('x86_64')
@@ -13,20 +13,16 @@ depends=('zlib' 'hicolor-icon-theme' 'libx11' 'fontconfig')
 makedepends=('git' 'desktop-file-utils')
 provides=("${pkgname/-git/}")
 conflicts=("${pkgname/-git/}")
-install=ryujinx.install
 source=(
   "git+https://github.com/Ryujinx/Ryujinx"
   "https://dotnetcli.azureedge.net/dotnet/Sdk/$_sdkver/dotnet-sdk-$_sdkver-linux-x64.tar.gz"
 )
 noextract=("dotnet-sdk-$_sdkver-linux-x64.tar.gz")
-sha256sums=(
-  'SKIP'
-  '0ec834dc0f11a994057cd05d84c6250db726457f2fe308091d50543a5285dd15'
-)
-b2sums=(
-  'SKIP'
-  '11dcaf7c7ac60695295d930354f3ce0f428a941702629033ea6fb097c30907c4d63353a89fd0e2be6f525125c57c4747193a0be35fe85249088c0bf1ba521fc1'
-)
+sha256sums=('SKIP'
+            '6c2ac04cb04f9584fb9cf9db7d1928cbc48bc4c710a1a88c2a132e9329780fbe')
+b2sums=('SKIP'
+        '9cd6efc134507a87290740f715fd5790a4c860b15ee69352dd43dff62f6768096a6f9781fae9c6d567b26b80002da9db777d5d34492b9225333a3cf1dc90270d')
+
 options=(!strip !debug)
 
 pkgver() {
