@@ -7,7 +7,7 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=5.0.r21460.a954451046
+pkgver=5.0.r21582.c8ea116658
 pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
@@ -18,7 +18,7 @@ depends=(
   alsa-lib
   bluez-libs
   bzip2
-  #enet
+  enet
   gcc-libs
   glibc
   hidapi
@@ -29,7 +29,6 @@ depends=(
   libevdev
   libfmt.so
   libgl
-  #libmgba
   libpulse
   libsfml-network.so
   libsfml-system.so
@@ -41,8 +40,7 @@ depends=(
   libxi
   libxrandr
   lzo
-  mbedtls2
-  #minizip-ng
+  minizip-ng
   pugixml
   sfml
   speexdsp
@@ -60,11 +58,10 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_commit=a9544510468740b77cf06ef28daaa65fe247fd32
+_commit=c8ea116658ab814751c514d9062d694547bf3a6d
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=${_commit}
   git+https://github.com/mozilla/cubeb.git
-  git+https://github.com/lsalzman/enet.git
   git+https://github.com/epezent/implot.git
   git+https://github.com/mgba-emu/mgba.git
   git+https://github.com/RetroAchievements/rcheevos.git
@@ -74,8 +71,7 @@ source=(
   git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('121d2d62b800abda6ab328d8a015751ec079c3c59510483987a37f52fd03a9a01a3c4c7bbef41c4b98370933eb895ffabce75012518a607f7c35668366c71790'
-        'SKIP'
+b2sums=('4974296e149ddb8cd369041f5b8f81973108472cf58ecde1a72778d2ee8bff3c31b2dc58c73a86cfd5c9bf95f53023585979ff591ccd275dd647761de28f4068'
         'SKIP'
         'SKIP'
         'SKIP'
@@ -88,7 +84,7 @@ b2sums=('121d2d62b800abda6ab328d8a015751ec079c3c59510483987a37f52fd03a9a01a3c4c7
 
 prepare() {
   cd dolphin-emu
-  for submodule in Externals/{cubeb/cubeb,enet/enet,implot/implot,mGBA/mgba,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
+  for submodule in Externals/{cubeb/cubeb,implot/implot,mGBA/mgba,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
     git submodule init ${submodule}
     git config submodule.${submodule}.url ../${submodule##*/}
     git -c protocol.file.allow=always submodule update ${submodule}
@@ -105,13 +101,13 @@ pkgver() {
 }
 
 build() {
-  export CFLAGS+=' -I/usr/include/mbedtls2'
-  export CXXFLAGS+=' -I/usr/include/mbedtls2'
-  export LDFLAGS+=' -L/usr/lib/mbedtls2'
   cmake -S dolphin-emu -B build -G Ninja \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DDISTRIBUTOR=archlinux.org \
+    -DENABLE_ANALYTICS=OFF \
+    -DENABLE_AUTOUPDATE=OFF \
+    -DENABLE_LTO=ON \
     -DENABLE_TESTS=OFF \
     -DUSE_MGBA=ON \
     -Wno-dev
