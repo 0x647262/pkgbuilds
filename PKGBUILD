@@ -6,7 +6,7 @@
 
 pkgname=neovim
 pkgver=0.10.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=('x86_64')
 url='https://neovim.io'
@@ -81,11 +81,14 @@ package() {
   # /usr/lib/tree_sitter.
   ln -s /usr/lib/tree_sitter "${pkgdir}"/usr/share/nvim/runtime/parser
 
-  # Make Arch Vim packages work
+  # Include system-wide Vim directory in runtimepath
   mkdir -p "${pkgdir}"/etc/xdg/nvim
-  echo "\" This line makes pacman-installed global Arch Linux vim packages work." > "${pkgdir}"/etc/xdg/nvim/sysinit.vim
-  echo "source /usr/share/nvim/archlinux.vim" >> "${pkgdir}"/etc/xdg/nvim/sysinit.vim
+  echo 'source /usr/share/nvim/archlinux.lua' > "${pkgdir}"/etc/xdg/nvim/sysinit.vim
 
   mkdir -p "${pkgdir}"/usr/share/vim
-  echo "set runtimepath+=/usr/share/vim/vimfiles" > "${pkgdir}"/usr/share/nvim/archlinux.vim
+  cat > "${pkgdir}"/usr/share/nvim/archlinux.lua << EOF
+-- Modify runtimepath to also search the system-wide Vim directory
+-- (eg. for Vim runtime files from Arch Linux packages)
+vim.opt.runtimepath:append({ '/usr/share/vim/vimfiles', '/usr/share/vim/vimfiles/after' })
+EOF
 }
