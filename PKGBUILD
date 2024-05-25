@@ -66,20 +66,20 @@ check() {
 }
 
 package() {
-  install -Dm644 -t "$pkgdir/usr/share/libalpm/hooks/" nvimdoc.hook
-  install -Dt "$pkgdir/usr/share/libalpm/scripts/" nvimdoc
+  install -Dm644 -t "${pkgdir}"/usr/share/libalpm/hooks/ nvimdoc.hook
+  install -Dt "${pkgdir}"/usr/share/libalpm/scripts/ nvimdoc
 
   cd ${pkgname}-${pkgver}
-  DESTDIR="$pkgdir" cmake --install build
+  DESTDIR="${pkgdir}" cmake --install build
+
+  install -Dm644 LICENSE.txt -t "${pkgdir}"/usr/share/licenses/${pkgname}/
+  install -Dm644 runtime/nvim.desktop -t "${pkgdir}"/usr/share/applications/
+  install -Dm644 runtime/nvim.appdata.xml -t "${pkgdir}"/usr/share/metainfo/
+  install -Dm644 runtime/nvim.png -t "${pkgdir}"/usr/share/pixmaps/
 
   # Tree-sitter grammars are packaged separately and installed into
   # /usr/lib/tree_sitter.
-  ln -s /usr/lib/tree_sitter "$pkgdir"/usr/share/nvim/runtime/parser
-
-  install -Dm644 LICENSE.txt -t "${pkgdir}/usr/share/licenses/${pkgname}/"
-  install -Dm644 runtime/nvim.desktop -t "${pkgdir}/usr/share/applications/"
-  install -Dm644 runtime/nvim.appdata.xml -t "${pkgdir}/usr/share/metainfo/"
-  install -Dm644 runtime/nvim.png -t "${pkgdir}/usr/share/pixmaps/"
+  ln -s /usr/lib/tree_sitter "${pkgdir}"/usr/share/nvim/runtime/parser
 
   # Make Arch Vim packages work
   mkdir -p "${pkgdir}"/etc/xdg/nvim
@@ -89,5 +89,3 @@ package() {
   mkdir -p "${pkgdir}"/usr/share/vim
   echo "set runtimepath+=/usr/share/vim/vimfiles" > "${pkgdir}"/usr/share/nvim/archlinux.vim
 }
-
-# vim:set sw=2 sts=2 et:
