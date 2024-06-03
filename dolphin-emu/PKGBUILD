@@ -7,7 +7,7 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=5.0.r21543.493a42d792
+pkgver=5.0.r21646.46a89936ae
 pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
@@ -16,7 +16,9 @@ url=https://dolphin-emu.org
 license=(GPL2)
 depends=(
   libevdev
+  libpulse
   libxi
+  libxrandr
   qt6-base
   qt6-svg
 )
@@ -27,7 +29,7 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_commit=493a42d792e3140b3e708c58d2f685210aee796d
+_commit=46a89936ae0724bf087a228133f4bd7bd682da3a
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=${_commit}
   git+https://github.com/arsenm/sanitizers-cmake.git
@@ -37,19 +39,20 @@ source=(
   git+https://github.com/fmtlib/fmt
   git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
   git+https://github.com/KhronosGroup/SPIRV-Cross.git
+  git+https://github.com/libsdl-org/SDL.git
+  git+https://github.com/libusb/hidapi.git
   git+https://github.com/libusb/libusb.git
   git+https://github.com/lsalzman/enet.git
-  git+https://github.com/lz4/lz4
+  git+https://github.com/lz4/lz4.git
   git+https://github.com/mgba-emu/mgba.git
   git+https://github.com/mozilla/cubeb.git
   git+https://github.com/randy408/libspng.git
   git+https://github.com/RetroAchievements/rcheevos.git
-  git+https://github.com/zlib-ng/zlib-ng.git
   git+https://github.com/syoyo/tinygltf.git
-  git+https://github.com/libusb/hidapi.git
-  https://github.com/libsdl-org/SDL
-  #sdc.patch
+  git+https://github.com/zlib-ng/minizip-ng.git
+  git+https://github.com/zlib-ng/zlib-ng.git
 )
+
 b2sums=(
   'SKIP'
   'SKIP'
@@ -70,32 +73,31 @@ b2sums=(
   'SKIP'
   'SKIP'
   'SKIP'
-  #'SKIP'
+  'SKIP'
 )
 
 prepare() {
   cd dolphin-emu
 
-  #git apply --verbose ../sdc.patch
-
   local -r submodules=(
-    cubeb/cubeb
     curl/curl
-    enet
-    fmt/fmt
+    xxhash
     implot/implot
-    libspng/libspng
+    fmt/fmt
+    VulkanMemoryAllocator
+    spirv_cross/SPIRV-Cross
+    SDL/SDL
+    hidapi/hidapi-src
     libusb/libusb
+    enet
     lz4/lz4
     mGBA/mgba
+    cubeb/cubeb
+    libspng/libspng
     rcheevos/rcheevos
-    spirv_cross/SPIRV-Cross
-    VulkanMemoryAllocator
-    xxhash
-    zlib-ng/zlib-ng
     tinygltf
-    hidapi/hidapi-src
-    SDL/SDL
+    minizip-ng
+    zlib-ng/zlib-ng
   )
 
   for _submodule in "${submodules[@]}"; do
