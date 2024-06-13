@@ -1,6 +1,6 @@
 # shellcheck disable=SC2034,SC2154,SC2164
 
-_sdkver='8.0.301'
+_sdkver='8.0.302'
 
 pkgname='ryujinx-git'
 pkgver=1.1.1330.r0.gc0f2491
@@ -19,9 +19,9 @@ source=(
 )
 noextract=("dotnet-sdk-$_sdkver-linux-x64.tar.gz")
 sha256sums=('SKIP'
-            'd237cf0e8865f51eb9634df32a8bcfb1dd95dac95c0d16b5d599df867ab16c27')
+            '8c84340e7bbbe478463debb9230e18d5b1a94583c2ebc04eb28a39a232b37f55')
 b2sums=('SKIP'
-        '811ce5a5031269c641e75c668a7a4ccaf5fa4bc75adb4e5d8c8ae4c75fe491a6dd9a0632e5f6b2ee6b343e775365c1b9e3b5ea353015a39a53f0ccdbddbbf6c4')
+        '56d7ade37162a3dbbd248f50a278338bf5a3d019b8001bb60e33e2a050c4e38cf3fecd958ed8bb6b7fb0fde9646bcc29e0d5aecfc13435ae9a6f2a8f0105c34f')
 
 options=(!strip !debug)
 
