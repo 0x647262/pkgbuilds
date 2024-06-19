@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 pkgbase = linux-ltbv3
 	pkgdesc = Linux built with the LLVM toolchain, ThinLTO, BORE CPU Scheduling, and x86-64-v3 CPU optimizations
-	pkgver = 6.9.3.arch1
-=======
-pkgbase = linux
-	pkgdesc = Linux
 	pkgver = 6.9.4.arch1
->>>>>>> 5331356e390970f2e4e39cebf2945a40b9086f9d
 	pkgrel = 1
 	url = https://github.com/archlinux/linux
 	arch = x86_64
@@ -30,7 +24,7 @@ pkgbase = linux
 	source = https://github.com/archlinux/linux/releases/download/v6.9.4-arch1/linux-v6.9.4-arch1.patch.zst
 	source = https://github.com/archlinux/linux/releases/download/v6.9.4-arch1/linux-v6.9.4-arch1.patch.zst.sig
 	source = config
-	source = https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/testing/linux-6.9-bore/0001-linux6.9.y-bore5.2.0.patch
+	source = https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/stable/linux-6.9-bore/0001-linux6.9.y-bore5.1.0.patch
 	validpgpkeys = ABAF11C65A2970B130ABE3C479BE3E4300411886
 	validpgpkeys = 647F28654894E3BD457199BE38DBBDC86092693E
 	validpgpkeys = 83BC8889351B5DEBBB68416EB8AC08600F108CDF
@@ -38,23 +32,14 @@ pkgbase = linux
 	sha256sums = SKIP
 	sha256sums = fbd9a98f741c5793b584e8d59b65fde2fb27f40528a8a6b6db05f8a2e20a45b0
 	sha256sums = SKIP
-<<<<<<< HEAD
-	sha256sums = 3acffee6493e810bd13f042b0a8e97e2b66a977b8ae7ec7c25a604446271860f
-	sha256sums = 2e54c100511c127fccf7e56e20e98b98abc5278484a5d8e7af869a3c99d800fe
-	b2sums = 8d8fe931d304458bcaa8c8b9572a5354ad272d88d1e0642e76b37247ce13bf70c49c8de6d8843fbb3037ee074ebc6cc94f0cc2b5b7e7187385a9dd0b0e2e250d
-=======
 	sha256sums = 54150ccad92d9a3e3383148c30326643773d2bfc92adf5649f37d62050f0c649
+	sha256sums = bc81ab988a988f13d04c7c56ce951531dff964465a63962fe3eea6e4cb0e6374
 	b2sums = 5579aef00f38e87ee9a9878ad4340aebc9c2590d8e813e2e106af59c6739e39a37267672ab7aff56160c8519d3014d139e6c849f33b9292c6fba019bc88d09da
->>>>>>> 5331356e390970f2e4e39cebf2945a40b9086f9d
 	b2sums = SKIP
 	b2sums = d9c3c74bab1b3acc3fd25825ce169b5052f8751d96d52006b8dcc2bdb9c43c6db59ebfa9f86fee9a6c5c64aae63cf03deb2acae1e595824dfcab8d254a96e3a1
 	b2sums = SKIP
-<<<<<<< HEAD
-	b2sums = 8a125f2584507a3645aef2ee75d728b1a8afe643de367c26c29fc91e48e570339a295d585ce3c4419cf39c2b2f3329a53ce7287fd92efbe7eb9a01a99e5d1d49
-	b2sums = 7e31c0f9e24c7b1f8e3f5b02b111cf21fbd59a56540f330c688c79cdbfb3ec6c80779885bf85bdc6c4062bec30e3d0708be9fe40be95404c260c13ba21c2ff6a
-=======
 	b2sums = 83a625cebd3f954b89c8836a6dc9350798b6f7878d29ecba134ddbd625988c54ed34eb6327a87e5e1518b938c3eb5c60881a7cc602628547b6e0bdadeb6a6987
->>>>>>> 5331356e390970f2e4e39cebf2945a40b9086f9d
+	b2sums = 8977bfc234b2d21864de9fec2a881680ac150610174f38c724965d81423f1fec69d2e4a045f24c3b3660d68f4ddde2e2b85c2ccb9b5f594737422ba0be37d9f0
 
 pkgname = linux-ltbv3
 	pkgdesc = The Linux built with the LLVM toolchain, ThinLTO, BORE CPU Scheduling, and x86-64-v3 CPU optimizations kernel and modules
