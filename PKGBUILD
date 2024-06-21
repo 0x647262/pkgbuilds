@@ -6,11 +6,14 @@
 
 pkgname=neovim
 pkgver=0.10.0
-pkgrel=4
+pkgrel=5
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=('x86_64')
 url='https://neovim.io'
-license=('Apache-2.0' 'LicenseRef-vim')
+license=(
+  'Apache-2.0'
+  'LicenseRef-vim'
+)
 depends=(
   'libluv'
   'libuv'
@@ -28,7 +31,14 @@ depends=(
   'tree-sitter-vimdoc'
   'unibilium'
 )
-makedepends=('cmake' 'git' 'ninja' 'lua51-mpack' 'lua51-lpeg' 'unzip')
+makedepends=(
+  'cmake'
+  'git'
+  'ninja'
+  'lua51-mpack'
+  'lua51-lpeg'
+  'unzip'
+)
 optdepends=(
   'python-pynvim: for Python plugin support (see :help python)'
   'xclip: for clipboard support on X11 (or xsel) (see :help clipboard)'
@@ -38,18 +48,24 @@ optdepends=(
 provides=('vim-plugin-runtime')
 backup=('etc/xdg/nvim/sysinit.vim')
 source=(
-  "https://github.com/neovim/neovim/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz"
+  "git+https://github.com/neovim/neovim.git#tag=v$pkgver"
   nvimdoc{,.hook}
 )
-sha512sums=('878cb58729a18179b38303bd9cf79e38997c87946665ac4e7b76d87e15f5d001028fd1454ce30b20773b20a4fe929dfa399fc2ec7f6db0774a4e864c9e8586c1'
+sha512sums=('1fe3b347f7cb9fdcf8e49012137117773c217257051ad48e69c49b40de0494e0777fb98f0254c6d834a677eae7f54cf1f2d9d646bbbbd61069c70bd4fb8aaf2f'
             '22662462c823de243599cdd3483e46ade4ab59b219e907468d34c18e584fe7477548e357ee2ce56bb098cf54b770b108a3511703dd486f0774a65c84af78f6aa'
             '3c6ee1e4646d09c164a2212f9e4d2f53158ff32911b0972e060a395a8d4685334574a7ede995a81680dcc0750cd3327a78beb7904a4bb326b2399d79a8b12d5e')
-b2sums=('b9bf44d2f0ae1075196f5f96b2fb5e974907406fa6e5bf09593d1f9f36135dab466b6a063d1d03e3716dce435df296ec6d00a2f015e85d0edd231fb9fd4c9385'
+b2sums=('81af53b5e4c670763d1f8930860f379e88af0ec779d2cd679ee2e38a4ee896af2874511559e8818927b22a66a1b3985eca132dfebadf532f6f9b6e91569b04f3'
         'd31cf81659e238fada8092755eb9be16f77c00a466107eb5770c6c9c32e043c91e6efada7ddb51663716a0e38ffa6e3d0093b3e6833aa961d845c7451a95491e'
         '26588b9da6459393076723bdfb8d2b16fed882070f2326bf7c35cd272dee9c18df603afb1ae2254cd0a59eff68189caf04828ef165d5de42c7a4222267604101')
 
+# Backport tree-sitter-vimdoc 3.0.0 queries
+prepare() {
+  cd ${pkgname}
+  git cherry-pick -n 105a9e3dcf95ba64e7737a479579e20063ead0bb || true
+}
+
 build() {
-  cd ${pkgname}-${pkgver}
+  cd ${pkgname}
   cmake \
     -Bbuild \
     -DCMAKE_BUILD_TYPE=Release \
@@ -60,7 +76,7 @@ build() {
 }
 
 check() {
-  cd ${pkgname}-${pkgver}
+  cd ${pkgname}
   ./build/bin/nvim --version
   ./build/bin/nvim --headless -u NONE -i NONE +q
 }
@@ -69,7 +85,7 @@ package() {
   install -Dm644 -t "${pkgdir}"/usr/share/libalpm/hooks/ nvimdoc.hook
   install -Dt "${pkgdir}"/usr/share/libalpm/scripts/ nvimdoc
 
-  cd ${pkgname}-${pkgver}
+  cd ${pkgname}
   DESTDIR="${pkgdir}" cmake --install build
 
   install -Dm644 LICENSE.txt -t "${pkgdir}"/usr/share/licenses/${pkgname}/
