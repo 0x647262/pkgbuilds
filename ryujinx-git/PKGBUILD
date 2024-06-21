@@ -3,7 +3,7 @@
 _sdkver='8.0.302'
 
 pkgname='ryujinx-git'
-pkgver=1.1.1334.r0.g311ca3c
+pkgver=1.1.1336.r0.g0afa8f2
 pkgrel=1
 pkgdesc="Experimental Nintendo Switch Emulator written in C#"
 arch=('x86_64')
