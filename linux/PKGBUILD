@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-ltbv3
-pkgver=6.9.4.arch1
+pkgver=6.9.6.arch1
 pkgrel=1
 pkgdesc='Linux built with the LLVM toolchain, ThinLTO, BORE CPU Scheduling, and x86-64-v3 CPU optimizations'
 _srctag=v${pkgver%.*}-${pkgver##*.}
@@ -40,17 +40,17 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('272800e0d1a7d01a78bce95a3aaf5c80816f50eb15c517d7003e58355760ecc2'
+sha256sums=('5d4366e2b89998f274abe03557ef3bc78b58e47fc62c102d51e6f49e5ed96b4b'
             'SKIP'
-            'fbd9a98f741c5793b584e8d59b65fde2fb27f40528a8a6b6db05f8a2e20a45b0'
+            'f11095f47da518ce4074be587438d30f424d98bcc5c59f7a1a8c00c58ddf5aa4'
             'SKIP'
-            '54150ccad92d9a3e3383148c30326643773d2bfc92adf5649f37d62050f0c649'
+            '7bdb1b3278286e6b54109187a49412c0474aa2855f9d054402e68d1423d0d76a'
             'bc81ab988a988f13d04c7c56ce951531dff964465a63962fe3eea6e4cb0e6374')
-b2sums=('5579aef00f38e87ee9a9878ad4340aebc9c2590d8e813e2e106af59c6739e39a37267672ab7aff56160c8519d3014d139e6c849f33b9292c6fba019bc88d09da'
+b2sums=('498da30f8f0c2c3812919eaca0dfa5679ab4517972182d2392e8833b9ca082b0d12777b6a35fd36228a21ac899ec4ee716e66b77e5625885415ccdab36cfb570'
         'SKIP'
-        'd9c3c74bab1b3acc3fd25825ce169b5052f8751d96d52006b8dcc2bdb9c43c6db59ebfa9f86fee9a6c5c64aae63cf03deb2acae1e595824dfcab8d254a96e3a1'
+        'a7cfa3dec239f0118600526eb1ac00a762349fd3a8c3b18a277d917e0022c927ca6d954f78d0f87d8ee3e7ba1148b741215c4ce19948665dc836419fe90c7c79'
         'SKIP'
-        '83a625cebd3f954b89c8836a6dc9350798b6f7878d29ecba134ddbd625988c54ed34eb6327a87e5e1518b938c3eb5c60881a7cc602628547b6e0bdadeb6a6987'
+        'aded483d056b2c62a288ca0bd3c5c08af36856cb2c23823813069e13f2174702bdd862755bc5b621a56448d455403583745f23b93f9eb08917d248c7ed056c04'
         '8977bfc234b2d21864de9fec2a881680ac150610174f38c724965d81423f1fec69d2e4a045f24c3b3660d68f4ddde2e2b85c2ccb9b5f594737422ba0be37d9f0')
 
 export KBUILD_BUILD_HOST=archlinux
