@@ -9,7 +9,6 @@ pkgname=(
 )
 pkgver=2407.r26.02e1b94149
 pkgrel=1
-epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
 url=https://dolphin-emu.org
