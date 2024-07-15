@@ -1,9 +1,9 @@
 # shellcheck disable=SC2034,SC2154,SC2164
 
-_sdkver='8.0.302'
+_sdkver='8.0.303'
 
 pkgname='ryujinx-git'
-pkgver=1.1.1340.r0.g1a0a351
+pkgver=1.1.1346.r0.g595e514
 pkgrel=1
 pkgdesc="Experimental Nintendo Switch Emulator written in C#"
 arch=('x86_64')
@@ -19,9 +19,9 @@ source=(
 )
 noextract=("dotnet-sdk-$_sdkver-linux-x64.tar.gz")
 sha256sums=('SKIP'
-            '8c84340e7bbbe478463debb9230e18d5b1a94583c2ebc04eb28a39a232b37f55')
+            '214ee467f75c42f1512748fe7ca8dd82da2af29cdf54be614a8997f0466ef070')
 b2sums=('SKIP'
-        '56d7ade37162a3dbbd248f50a278338bf5a3d019b8001bb60e33e2a050c4e38cf3fecd958ed8bb6b7fb0fde9646bcc29e0d5aecfc13435ae9a6f2a8f0105c34f')
+        '3008c5b3f84a965b717b2f51733cbf6d5ba218f5ae97dc250a2e7279e645b8577d8b6d5443f73e8130385d2263196f954ba6bfa64a2b33a8685d0c5a4035ed19')
 
 options=(!strip !debug)
 
