@@ -6,7 +6,7 @@
 
 pkgname=neovim
 pkgver=0.10.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=(x86_64)
 url=https://neovim.io
@@ -61,10 +61,11 @@ b2sums=('13090b0f9f518a52b20f92d226339c1b42e59dfa696f581c4ef7a9a12b79ec07b4aab45
 build() {
   cd ${pkgname}
   cmake \
-    -Bbuild \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DUSE_BUNDLED=OFF \
+    -B build \
+    -G Ninja \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D USE_BUNDLED=OFF \
     -W no-dev
   cmake --build build --verbose
 }
