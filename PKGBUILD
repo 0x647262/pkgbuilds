@@ -7,15 +7,14 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=5.0.r21582.c8ea116658
-pkgrel=2
+pkgver=2407
+pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
 url=https://dolphin-emu.org
-license=(GPL2)
+license=(GPL-2.0-or-later)
 depends=(
-  alsa-lib
   bluez-libs
   bzip2
   enet
@@ -26,31 +25,35 @@ depends=(
   libavformat.so
   libavutil.so
   libcurl.so
-  libevdev
   libfmt.so
   libgl
-  libpulse
   libsfml-network.so
   libsfml-system.so
   libspng.so
   libswscale.so
-  libudev.so
   libusb-1.0.so
   libx11
   libxi
   libxrandr
+  lz4
   lzo
+  mbedtls2
   minizip-ng
   pugixml
+  sdl2
   sfml
   speexdsp
   xz
   zstd
 )
 makedepends=(
+  alsa-lib
   cmake
   git
-  miniupnpc
+  libevdev
+  libminiupnpc.so
+  libpulse
+  libudev.so
   ninja
   python
   qt6-base
@@ -58,9 +61,9 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_commit=c8ea116658ab814751c514d9062d694547bf3a6d
+_tag=b92e354389bb7c0bd114a8631b8af110d3cb3a14
 source=(
-  dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=${_commit}
+  dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
   git+https://github.com/mozilla/cubeb.git
   git+https://github.com/epezent/implot.git
   git+https://github.com/mgba-emu/mgba.git
@@ -71,7 +74,7 @@ source=(
   git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('4974296e149ddb8cd369041f5b8f81973108472cf58ecde1a72778d2ee8bff3c31b2dc58c73a86cfd5c9bf95f53023585979ff591ccd275dd647761de28f4068'
+b2sums=('3b36a9ae0eaea3cf9f1a5fc3f3921618c0145e5d42771b5601c2418495adf7c661c3476a862328fab570ccf61d7bb608095fa0c659252562bb2fe2a3317985bb'
         'SKIP'
         'SKIP'
         'SKIP'
@@ -97,12 +100,13 @@ prepare() {
 
 pkgver() {
   cd dolphin-emu
-  git describe | sed 's/-/.r/; s/-g/./'
+  git describe --tags
 }
 
 build() {
   cmake -S dolphin-emu -B build -G Ninja \
     -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_SKIP_RPATH=ON \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DDISTRIBUTOR=archlinux.org \
     -DENABLE_ANALYTICS=OFF \
@@ -116,8 +120,12 @@ build() {
 
 package_dolphin-emu() {
   depends+=(
+    alsa-lib
     hicolor-icon-theme
+    libevdev
     libminiupnpc.so
+    libpulse
+    libudev.so
     qt6-base
     qt6-svg
   )
