@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-ltbv3
-pkgver=6.9.9.arch1
+pkgver=6.10.arch1
 pkgrel=1
 pkgdesc='Linux built with the LLVM toolchain, ThinLTO, BORE CPU Scheduling, BOLT, and x86-64-v3 CPU optimizations'
 _srctag=v${pkgver%.*}-${pkgver##*.}
@@ -32,7 +32,7 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v"${pkgver%%.*}.x/$_srcname".tar.{xz,sign}
   "$url/releases/download/$_srctag/linux-$_srctag".patch.zst{,.sig}
   config # the main kernel config file
-  https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/stable/linux-6.9-bore/0001-linux6.9.y-bore5.1.0.patch
+  https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/stable/linux-6.10-bore/0001-linux6.10.y-bore5.2.4.patch
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886 # Linus Torvalds
@@ -40,18 +40,18 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('2be05b487eb239a3bf687d628a8f104177d09c310f00bcc2a5e50f1733421eb9'
-            'SKIP'
-            '69be8bdce434da002fc46c92098754a967306675899c003f11c75d574c84e3c5'
-            'SKIP'
-            '3db08cfce91660a08d16f090f380eadf1cb8ba94ef569d180e07abd8bffcb484'
-            'bc81ab988a988f13d04c7c56ce951531dff964465a63962fe3eea6e4cb0e6374')
-b2sums=('a228397902894f566d49adef24e4d44271893173cf0c58e8eb6006137dfb870b5f3aea17cadc775988a0682ba4a5261ebd3f10689b6c096f762cc8af666c56ff'
+b2sums=('bb243ea7493b9d63aa2df2050a3f1ae2b89ee84a20015239cf157e3f4f51c7ac5efedc8a51132b2d7482f9276ac418de6624831c8a3b806130d9c2d2124c539b'
         'SKIP'
-        'b115ea5f1d8fcd5f5fef5b443eea86e69541ceabf747fa851bb2b18b7b8ab2d4fea7f31aeba367bfa742fcb5df4725a4296bac83fcef22717a496122d649ca03'
+        '733e830c81821a4d0fe2b4af9b80e5284d7bc625221cd2308308f24c76c3fc030ddeb400e9756bb19c75d632359e9535b8218db2421bb8ef5cdbb5e782af96bd'
         'SKIP'
-        '5a5cb43336a32ae26f1411b0f418d553a0f213db00bf6e618b2477925fa9c8468d708630988d9fd1cfda7bd183f92167d93739fc3b9cdaca5a0a19bc42446c49'
-        '8977bfc234b2d21864de9fec2a881680ac150610174f38c724965d81423f1fec69d2e4a045f24c3b3660d68f4ddde2e2b85c2ccb9b5f594737422ba0be37d9f0')
+        'b591064140306057ececa411931b040971cf082e42ad094f8aafbf881bb0d1afb157a6bd33cc5b10cea2aaf1e9fc0529295f91368b261f1b1b99da7792b8d84c'
+        '6ae1704d9d5f71542d6aed9753fc9b1fc07bc813835c0196d319a3c861e3bd7b759e6fa7acdcddce6cd45f28bee359a83c0e7dd62551808570152ae1a868eb55')
+sha256sums=('774698422ee54c5f1e704456f37c65c06b51b4e9a8b0866f34580d86fef8e226'
+            'SKIP'
+            'fdb6552c43bcbc465f88c6ec2e01eb26791ac21f81687ca891ac1152503f7cad'
+            'SKIP'
+            '1eee90934450856b6d13dbd3edc3524e5700311ca2b8e7b9ed444d1ea94c4130'
+            '6abb0c1b3b67b1820fdec28b72c0c38b20180a8162458a64aa6c57e7eedc3e5f')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
