@@ -8,7 +8,7 @@ pkgname=(
   dolphin-emu-tool
 )
 pkgver=2407
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
