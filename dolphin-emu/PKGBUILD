@@ -7,7 +7,7 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=2407.r78.1fcb2ee5c1
+pkgver=2409.r24.2c15d7af7f
 pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
@@ -29,7 +29,7 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_commit=1fcb2ee5c12eb9a3552fcb6ea7dd2fcd7c6c1749
+_commit=2c15d7af7fdf33e1fabab7911bb5e1e5a704304d
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#commit=${_commit}
   git+https://github.com/arsenm/sanitizers-cmake.git
