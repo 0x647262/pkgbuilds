@@ -32,7 +32,8 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v"${pkgver%%.*}.x/$_srcname".tar.{xz,sign}
   "$url/releases/download/$_srctag/linux-$_srctag".patch.zst{,.sig}
   config # the main kernel config file
-  https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/stable/linux-6.10-bore/0001-linux6.10.y-bore5.2.4.patch
+  #https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/stable/linux-6.10-bore/0001-linux6.10.y-bore5.2.8.patch
+  #0001-linux6.10.y-bore5.2.4.patch
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886 # Linus Torvalds
@@ -44,14 +45,12 @@ sha256sums=('c0923235779d4606bba87f72b6fe11f796e9e40c1ca9f4d5dbe04cd47ee3c595'
             'SKIP'
             'd4c23cdd7ea651eed04e0dfddd1eff32a691e914066d746c12fd112459fe35ff'
             'SKIP'
-            'aeda0ec802aca7d0e4a9e62ddcee2d69a7b59ee8c5f2de6d951fa78b1c8ba3e1'
-            '6abb0c1b3b67b1820fdec28b72c0c38b20180a8162458a64aa6c57e7eedc3e5f')
+            'aeda0ec802aca7d0e4a9e62ddcee2d69a7b59ee8c5f2de6d951fa78b1c8ba3e1')
 b2sums=('01a004ce8886b00be4ca927ca6b1ce10b5d31535687022accf0b9d1f4aa9b47a1622a82611bd9544abb2c90ad914ad227392d0525d7c93eefbb38fa25ba6c809'
         'SKIP'
         '2632406d45f6583f72120e35d07a02b22c59fee392d369e6aa394dbff0fb2b6dfe6371d2b7ea7ec9ddee1ff00397b9c28886f324eff37f1ce7d65d28e56a0957'
         'SKIP'
-        'b4f62cfba53d934f7419cf7e24f951b83bee01249ce7d461a662b0d348c5553daf8d7577c7f208a6aa13814055ec77e8867d6f6fea3fa872b28c390e873e593b'
-        '6ae1704d9d5f71542d6aed9753fc9b1fc07bc813835c0196d319a3c861e3bd7b759e6fa7acdcddce6cd45f28bee359a83c0e7dd62551808570152ae1a868eb55')
+        'b4f62cfba53d934f7419cf7e24f951b83bee01249ce7d461a662b0d348c5553daf8d7577c7f208a6aa13814055ec77e8867d6f6fea3fa872b28c390e873e593b')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
