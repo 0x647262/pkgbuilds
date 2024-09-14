@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux
-pkgver=6.10.8.arch1
+pkgver=6.10.10.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -42,16 +42,16 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('c0923235779d4606bba87f72b6fe11f796e9e40c1ca9f4d5dbe04cd47ee3c595'
+sha256sums=('e687e735b5eb9efb6d67b42433c93fc9118106a995514f062652873b5e809bcd'
             'SKIP'
-            'd4c23cdd7ea651eed04e0dfddd1eff32a691e914066d746c12fd112459fe35ff'
+            '064b9841dd6738e8a6f8859743c66e0d603541b6afa021ab98ea7e3623fca108'
             'SKIP'
-            'aeda0ec802aca7d0e4a9e62ddcee2d69a7b59ee8c5f2de6d951fa78b1c8ba3e1')
-b2sums=('01a004ce8886b00be4ca927ca6b1ce10b5d31535687022accf0b9d1f4aa9b47a1622a82611bd9544abb2c90ad914ad227392d0525d7c93eefbb38fa25ba6c809'
+            'c641cd32013e68bbe140e25ce77580ba326dbbc9288b25b2b57996257d24a9ea')
+b2sums=('8a15910089d080886046b1fd8d57ef28ce872bf428e67ccbc9d5ca92da794d6dee7ab83cc914a499b40962e2990c3b1e5b11ae7d12c1eff7bec548c9a67df03a'
         'SKIP'
-        '2632406d45f6583f72120e35d07a02b22c59fee392d369e6aa394dbff0fb2b6dfe6371d2b7ea7ec9ddee1ff00397b9c28886f324eff37f1ce7d65d28e56a0957'
+        '06b8f21c167f3376a62f9bd0d3e0275a4ba32736aaa5d7fb94a07e99445186ab8f9426468d33c00fd43c52c52ffdb3ee77e6802db0781ffad6b8d74cdc4951a1'
         'SKIP'
-        'b4f62cfba53d934f7419cf7e24f951b83bee01249ce7d461a662b0d348c5553daf8d7577c7f208a6aa13814055ec77e8867d6f6fea3fa872b28c390e873e593b')
+        '9f80869b7d608ba3e69fcee52584af809db6a5ed984fd38e4bc0af64f667c2695995d0290fb395eb58b5bdade5cfa1c3175f216913c4f8a9c8d297f1d720c59e')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -143,6 +143,7 @@ _package-headers() {
   install -Dt "$builddir/kernel" -m644 kernel/Makefile
   install -Dt "$builddir/arch/x86" -m644 arch/x86/Makefile
   cp -t "$builddir" -a scripts
+  ln -srt "$builddir" "$builddir/scripts/gdb/vmlinux-gdb.py"
 
   # required when STACK_VALIDATION is enabled
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
