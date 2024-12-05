@@ -7,8 +7,8 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=2409
-pkgrel=2
+pkgver=2412
+pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -61,7 +61,7 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_tag=3c4d4fcd09173ea070dc812ab5d64ca3a3af5f29
+_tag=992b4ea9309899ebc7ca576ebea711a70523098a
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
   git+https://github.com/mozilla/cubeb.git
@@ -75,7 +75,7 @@ source=(
   git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('749cce559d4e120ecd158c133ccee9b8681cb46064e6d1b33f91713c8e3025058a3573a458af3bc9035a860d208db3c94b1122b9b2f5403493ca6ca7c3de58bb'
+b2sums=('09e0e0dedac6bc7f91990f7a2002736a0f5a6ab303c8ee31a5d6f936e7611e762ccd8362d85536a1bb645af11e8d1b421ef175cff8d161cbadf3d11d37b86401'
         'SKIP'
         'SKIP'
         'SKIP'
