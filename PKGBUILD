@@ -24,7 +24,7 @@ validpgpkeys=(5AC1A08B03BD7A313E0A955AF5E6E9EEB9461DD7
 pkgdesc="A compatibility layer for running Windows programs"
 url="https://www.winehq.org"
 arch=(x86_64)
-options=(!lto)
+options=(!lto pestrip)
 license=(LGPL-2.1-or-later)
 depends=(
   desktop-file-utils
@@ -106,12 +106,20 @@ build() {
   export CROSSCXXFLAGS="-O2 -pipe -g"
   export CROSSLDFLAGS="-Wl,-O1"
 
+  # Make sure correct source file paths are recorded in debug information,
+  # so that wine crash reports can have correct paths
+  if [[ $CFLAGS =~ (-ffile-prefix-map=[^[:space:]]+) ]]; then
+    CROSSCFLAGS="$CROSSCFLAGS ${BASH_REMATCH[1]}"
+    CROSSCXXFLAGS="$CROSSCXXFLAGS ${BASH_REMATCH[1]}"
+  fi
+
   cd "$srcdir/$pkgname-64-build"
   ../wine/configure \
     --prefix=/usr \
     --libdir=/usr/lib \
     --disable-tests \
-    --enable-archs=x86_64,i386
+    --enable-archs=x86_64,i386 \
+    --enable-build-id
 
   make
 }
