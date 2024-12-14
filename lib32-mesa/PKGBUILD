@@ -16,8 +16,8 @@ pkgname=(
   lib32-vulkan-swrast
   lib32-vulkan-virtio
 )
-pkgver=24.2.7
-pkgrel=1
+pkgver=24.3.1
+pkgrel=3
 epoch=1
 pkgdesc="Open-source OpenGL drivers - 32-bit"
 url="https://www.mesa3d.org/"
@@ -31,12 +31,12 @@ makedepends=(
   lib32-libdrm
   lib32-libelf
   lib32-libglvnd
+  lib32-libpng
   lib32-libva
   lib32-libvdpau
   lib32-libx11
   lib32-libxcb
   lib32-libxext
-  lib32-libxfixes
   lib32-libxml2
   lib32-libxrandr
   lib32-libxshmfence
@@ -79,6 +79,9 @@ options=(
 )
 source=(
   "https://mesa.freedesktop.org/archive/mesa-$pkgver.tar.xz"{,.sig}
+  0001-dri-don-t-fetch-X11-modifiers-if-we-don-t-support-th.patch
+  0002-egl-wayland-only-supply-LINEAR-modifier-when-support.patch
+  0003-egl-wayland-fallback-to-implicit-modifiers-if-advert.patch
 )
 validpgpkeys=(
   946D09B5E4C9845E63075FF1D961C596A7203456 # Andres Gomez <tanty@igalia.com>
@@ -115,8 +118,11 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-b2sums=('eb1b0285e14e77c3140275b322ff084fca74a1048e6df38f4b14cb03ed7fc436897f7b33d107d1e262d9d4944229fb1e85d02e731c645ead5a7b269dec9334b7'
+b2sums=('d3efc322388e29f651b15b0396fef8a6acc0cf24881165900845e429dd6cb53d51511f174d6a4017f48962b764b9a42f069825196af9f4ca969a4b46e1108a0e'
         'SKIP'
+        'd7a57fefd0ff94bbd88a9433b27b9037c07070f097264027f17026011259f33236a618b645a1a506b377da22f8c887f55f83c6320a8c7b6c3db32d90f60a5e93'
+        'c1c722b0249808d34863e8b650fd2e60eb7e6168fd9e3948e8d260624a9753ec89332b0831faddf2b4dea388b74f07479ab833d1ad772edd8f20fe55bf5a813b'
+        '48105e489e06e9ad714cb61e23ef0962c308fb79f263111b6e102f3e8beed479bdd15cee7f3a5876da658ea1f25b1b1369a89f24bf6c6bb3285833b1206d1c29'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9c34f1ab14ad5ae124882513e0f14b1d731d06a43203bdc37fa3b202dd3ce93dbe8ebb554d01bab475689fe6ffd3ec0cbc0d5365c9b984cb83fb34ea3e9e732e'
         'fac5cf6339dc3c0a40b100035a5c874cc7b2efeafeb31c51488d25156e392dc9db86a497e76eead351d2126f69d060422faa9c55d73407a0de9f5be18d234123'
@@ -134,8 +140,11 @@ b2sums=('eb1b0285e14e77c3140275b322ff084fca74a1048e6df38f4b14cb03ed7fc436897f7b3
         '8bc6f68ed286bea617a2cfaf3949bb699d3a0466faeca735314a51596ce950e4ee57eda88154bd562c1728cfaff4cdb5bc1ba701b9d47a9c50d4c4f011bee975')
 
 # https://docs.mesa3d.org/relnotes.html
-sha256sums=('a0ce37228679647268a83b3652d859dcf23d6f6430d751489d4464f6de6459fd'
+sha256sums=('9c795900449ce5bc7c526ba0ab3532a22c3c951cab7e0dd9de5fcac41b0843af'
             'SKIP'
+            '2c20fee505be9a1f08546b63457b8378b0f1fcff58e60c03378b7de0a87a1e81'
+            'a58e6d0631da6dd077530136bb44f0233cd279fc75e3b65b495ec90be16db91a'
+            '606acb4073f46c7ca7edec96b6af06619642f3bbcd6afab2c57bff26266b917f'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             'a941429fea7e08bedec25e4f6785b6ffaacc6b755da98df5ef3e7dcf4a124c4f'
             '168fb715dda47215e360912c096649d23d58bf392ac62f73919e831745e40f26'
@@ -155,6 +164,13 @@ sha256sums=('a0ce37228679647268a83b3652d859dcf23d6f6430d751489d4464f6de6459fd'
 prepare() {
   cd mesa-$pkgver
 
+  # https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/issues/19
+  # https://gitlab.freedesktop.org/mesa/mesa/-/issues/12253
+  # https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/32535
+  patch -Np1 -i ../0001-dri-don-t-fetch-X11-modifiers-if-we-don-t-support-th.patch
+  patch -Np1 -i ../0002-egl-wayland-only-supply-LINEAR-modifier-when-support.patch
+  patch -Np1 -i ../0003-egl-wayland-fallback-to-implicit-modifiers-if-advert.patch
+
   # Include package release in version string so Chromium invalidates
   # its GPU cache; otherwise it can cause pages to render incorrectly.
   # https://bugs.launchpad.net/ubuntu/+source/chromium-browser/+bug/2020604
@@ -169,7 +185,6 @@ build() {
     -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,llvmpipe,softpipe,iris,crocus,i915,zink
     -D gallium-extra-hud=true
     -D gallium-nine=true
-    -D gallium-omx=disabled
     -D gallium-opencl=icd
     -D gallium-rusticl=true
     -D gles1=disabled
@@ -184,7 +199,7 @@ build() {
     -D valgrind=disabled
     -D video-codecs=all
     -D vulkan-drivers=amd,intel,intel_hasvk,nouveau,swrast,virtio
-    -D vulkan-layers=device-select,intel-nullhw,overlay
+    -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot
   )
 
   export BINDGEN_EXTRA_CLANG_ARGS="-m32"
@@ -221,11 +236,11 @@ package_lib32-mesa() {
     lib32-libx11
     lib32-libxcb
     lib32-libxext
-    lib32-libxfixes
     lib32-libxshmfence
     lib32-libxxf86vm
     lib32-llvm-libs
     lib32-lm_sensors
+    lib32-spirv-tools
     lib32-wayland
     lib32-zlib
     lib32-zstd
@@ -300,8 +315,6 @@ package_lib32-opencl-clover-mesa() {
     lib32-libdrm
     lib32-libelf
     lib32-llvm-libs
-    lib32-spirv-llvm-translator
-    lib32-spirv-tools
     lib32-zlib
     lib32-zstd
 
@@ -354,6 +367,7 @@ package_lib32-vulkan-intel() {
     lib32-libx11
     lib32-libxcb
     lib32-libxshmfence
+    lib32-spirv-tools
     lib32-systemd
     lib32-vulkan-icd-loader
     lib32-wayland
@@ -377,6 +391,7 @@ package_lib32-vulkan-mesa-layers() {
     lib32-gcc-libs
     lib32-glibc
     lib32-libdrm
+    lib32-libpng
     lib32-libxcb
     lib32-wayland
 
@@ -400,6 +415,7 @@ package_lib32-vulkan-nouveau() {
     lib32-libx11
     lib32-libxcb
     lib32-libxshmfence
+    lib32-spirv-tools
     lib32-systemd
     lib32-vulkan-icd-loader
     lib32-wayland
@@ -429,6 +445,7 @@ package_lib32-vulkan-radeon() {
     lib32-libxcb
     lib32-libxshmfence
     lib32-llvm-libs
+    lib32-spirv-tools
     lib32-systemd
     lib32-vulkan-icd-loader
     lib32-wayland
@@ -457,6 +474,7 @@ package_lib32-vulkan-swrast() {
     lib32-libxcb
     lib32-libxshmfence
     lib32-llvm-libs
+    lib32-spirv-tools
     lib32-systemd
     lib32-vulkan-icd-loader
     lib32-wayland
