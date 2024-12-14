@@ -1,9 +1,9 @@
 # shellcheck disable=SC2034,SC2154,SC2164
 
-_sdkver='9.0.100-rc.1.24452.12'
+_sdkver='9.0.100'
 
 pkgname='ryujinx-git'
-pkgver=1.1.1386.r0.g2f36a66
+pkgver=1.2.42.r0.gf4b757c
 pkgrel=1
 pkgdesc="Experimental Nintendo Switch Emulator written in C#"
 arch=('x86_64')
@@ -14,24 +14,24 @@ makedepends=('git' 'desktop-file-utils')
 provides=("${pkgname/-git/}")
 conflicts=("${pkgname/-git/}")
 source=(
-  "git+https://github.com/Ryujinx/Ryujinx"
+  "git+https://github.com/GreemDev/Ryujinx"
   "https://dotnetcli.azureedge.net/dotnet/Sdk/$_sdkver/dotnet-sdk-$_sdkver-linux-x64.tar.gz"
   global.json.patch
 )
 noextract=("dotnet-sdk-$_sdkver-linux-x64.tar.gz")
 sha256sums=('SKIP'
-            '6b17f40ac282131acd52cdfe63f37f687d5edbf576b839596ffc6d51a2d9acb8'
-            'SKIP')
+            '4c971ac80615faa806de82f0ab3073e50aebb402b79ac265ab97765c9a29ed56'
+            '0c6a4a720542194ee508178ff5ff9f1273031deba7cc93c0463422b12614a099')
 b2sums=('SKIP'
-        '75d2682a2c9543fc79276f93e5ae1f1323f6a6b1d8aa61daff35b288b6424ef803d8a26846f982afe571688e83ebb6df76ab6678708addf422537edcc35aba0b'
-        'SKIP')
+        '4fa610ddb4a4df326f591b0b588252402de1fa5910b94c49ca278d06bfd65385c63689e415adf0c3d64ab47a8eb0b2c4fe21bdd5a57224f3ef90b5a293961b6f'
+        '544ffae56dd014736b779112b4494b41048f95045316e4438f83ffe4e0d4a6f16289cfd68fced5bcaf7a476431f664050749553c8a565b4865f407f35c6a37da')
 
 options=(!strip !debug)
 
 pkgver() {
   cd "Ryujinx"
 
-  git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags --abbrev=7 | sed 's/Canary-//' | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
@@ -58,7 +58,7 @@ build() {
     --output ../publish \
     -p:DebugType=embedded \
     -p:ExtraDefineConstants=DISABLE_UPDATER%2CFORCE_EXTERNAL_BASE_DIR \
-    -p:Version="$(git describe --tags)" \
+    -p:Version="$(git describe --tags | sed 's/Canary-//')" \
     --runtime linux-x64 \
     --self-contained
 }
