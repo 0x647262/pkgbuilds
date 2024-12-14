@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux
-pkgver=6.11.8.arch1
+pkgver=6.12.4.arch1
 pkgrel=2
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -42,16 +42,16 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('aee8a844fe152420bece70ffae8525b9b23089aa4da31fa32f30e1859bf93c3d'
+sha256sums=('6f35f821433d8421be7167990747c7c4a0c451958fb96883446301af13d71152'
             'SKIP'
-            'f1fc632a9ba819dd8aa019ddf59df554a906a5e17838566c9203b7a7582d8043'
+            '8d84f0e5f013c6c80cd2a2fe26da8e0c1170edc058f6f378e1261541781c12b9'
             'SKIP'
-            '031a9b86734de040aa0bc46dcdbeef509d01de8ead9cc90355ea49757b7766e8')
-b2sums=('2d3b56bf4fa3a3d20c5379856c9e2d2ce7220bc05320859e123053d08138dd380f9aa7a9d11df3a8fbe07583a28bafffc0ffd3ed9cf28ebf09d6af7e97a0ed5f'
+            'a6a234cd982d21f0d7daa3ba921293e450abd87ff5d7474d4a153b3f34cfabc5')
+b2sums=('5f0db13ed414b6221db1acb6019580e10533ecd1b596918230a6076ce433c75c154a3799bcdab48b1fbb2ff90e573f8cc879ae2d26677c560c6818fa37ce3c24'
         'SKIP'
-        'd08d4aa2053a0b40c879aa7f6e1a58d271ea7d433dad9023eadedd0eeb2f67d2ea93d90137d84e0ce41d5104dfde1a8a20e0fb93f0faa124b6e44dda631b8024'
+        '3544c1e7dcf488d06c7411ebde2b9133cfd27d194f7b668784a756efc6ba5b48b237054c8404501dd6f6fb79945c570bef4cd29c314a16ad2dcb66ae48bbdbf2'
         'SKIP'
-        '2af3ec4f6e4dd033856d5306ec37a1e02d804c96d55cae7ba64f6b4d7d2b0e14d9888618cc7f2af5211a76d106cc6cc1f41f5fc10e22584051067a1ef4e5c868')
+        'fc60a774d8ba8a56b2397de7bb9908ae6e3ed733426a1b6a6574a11259f71559d77848cb4b43faf423d68c92c7fc4343be1eb1882a5f7d4e32065bf66f1e0753')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -98,8 +98,9 @@ _package() {
     kmod
   )
   optdepends=(
-    'wireless-regdb: to set the correct wireless channels of your country'
     'linux-firmware: firmware images needed for some devices'
+    'scx-scheds: to use sched-ext schedulers'
+    'wireless-regdb: to set the correct wireless channels of your country'
   )
   provides=(
     KSMBD-MODULE
