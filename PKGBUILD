@@ -8,7 +8,7 @@ pkgname=(
   dolphin-emu-tool
 )
 pkgver=2412
-pkgrel=2
+pkgrel=3
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -27,8 +27,8 @@ depends=(
   libcurl.so
   libfmt.so
   libgl
-  libsfml-network.so
-  libsfml-system.so
+  #libsfml-network.so
+  #libsfml-system.so
   libspng.so
   libswscale.so
   libusb-1.0.so
@@ -40,7 +40,6 @@ depends=(
   mbedtls2
   pugixml
   sdl2
-  sfml
   speexdsp
   xxhash
   xz
@@ -58,6 +57,7 @@ makedepends=(
   python
   qt6-base
   qt6-svg
+  #sfml
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
@@ -113,7 +113,7 @@ build() {
     -DDISTRIBUTOR=archlinux.org \
     -DENABLE_ANALYTICS=OFF \
     -DENABLE_AUTOUPDATE=OFF \
-    -DENABLE_LTO=ON \
+    -DENABLE_LTO=OFF \
     -DENABLE_TESTS=OFF \
     -DUSE_MGBA=ON \
     -Wno-dev
