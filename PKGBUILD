@@ -25,7 +25,7 @@ depends=(
   libavformat.so
   libavutil.so
   libcurl.so
-  libfmt.so
+  #libfmt.so
   libgl
   #libsfml-network.so
   #libsfml-system.so
@@ -66,6 +66,7 @@ source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
   git+https://github.com/mozilla/cubeb.git
   git+https://github.com/epezent/implot.git
+  git+https://github.com/fmtlib/fmt.git
   git+https://github.com/mgba-emu/mgba.git
   git+https://github.com/zlib-ng/minizip-ng.git
   git+https://github.com/RetroAchievements/rcheevos.git
@@ -85,11 +86,12 @@ b2sums=('09e0e0dedac6bc7f91990f7a2002736a0f5a6ab303c8ee31a5d6f936e7611e762ccd836
         'SKIP'
         'SKIP'
         'SKIP'
+        'SKIP'
         'SKIP')
 
 prepare() {
   cd dolphin-emu
-  for submodule in Externals/{cubeb/cubeb,implot/implot,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
+  for submodule in Externals/{cubeb/cubeb,implot/implot,fmt/fmt,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
     git submodule init ${submodule}
     git config submodule.${submodule}.url ../${submodule##*/}
     git -c protocol.file.allow=always submodule update ${submodule}
