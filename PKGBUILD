@@ -45,7 +45,10 @@ optdepends=(
   'xsel: for clipboard support on X11 (or xclip) (see :help clipboard)'
   'wl-clipboard: for clipboard support on wayland (see :help clipboard)'
 )
-provides=(vim-plugin-runtime)
+provides=(
+  nvim
+  vim-plugin-runtime
+)
 backup=(etc/xdg/nvim/sysinit.vim)
 source=(
   "git+https://github.com/neovim/neovim.git#tag=v$pkgver"
