@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-ltbv3
-pkgver=6.13.2.arch1
+pkgver=6.13.7.arch1
 pkgrel=1
 pkgdesc='Linux built with the LLVM toolchain, ThinLTO, BORE CPU Scheduling, BOLT, and x86-64-v3 CPU optimizations'
 url='https://github.com/archlinux/linux'
@@ -15,6 +15,9 @@ makedepends=(
   pahole
   perl
   python
+  rust
+  rust-bindgen
+  rust-src
   tar
   xz
   clang
@@ -39,16 +42,16 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('cdf62981906bbbe9701aeb73c4f9fcc807a09846c288731663d62717ed1ae705'
+sha256sums=('3a39b62038b7ac2f43d26a1f84b4283e197804e1e817ad637e9a3d874c47801d'
             'SKIP'
-            '20ff3a47fab59c996c91ec4d0efe84a60ca9f3ff8adae7c61fef480a7fce4b27'
-            '6a0b1fe223d70b1abbc81675f85684e582ea8b997ecd9bd32e0461b717c6a78e'
+            'e371e59fba634b56b6cd99dff54f13437ca0c5fe95b27f115591f1b06cb01c7e'
+            'b38f80cf02f9af621ba305ec9ccf992f9f238eb5668110b15cc0c049139f0cd6'
             'SKIP'
             '9154233475c2abdfa000d1cec1a5229fc8b6d1cfd5a70f542ebda01c9de0d73e')
-b2sums=('9434dbcb828d49d0b7b68c3ff6651ed227327e8e9a760200fbea91aa37e7949438d253f1a4586da4f72ac1069484e9720b8c8ac3f995d597b33f272065763336'
+b2sums=('dc9e71842d7e9d2e016ca2c6e791d627790c87cd445b404c73745dc565eb89617ec69f1150b228d7853a595ea7f6daf6acdb74f8383088af30d42bb4c062a129'
         'SKIP'
-        '3e530261307cca399da44b1cbb0c84bb3468b1a273af8e38a2b35572b1c56734e12f4ccca2ab0ef07c7bc2a38ffe1969f35024a1532e7272cc0ee784d806ae14'
-        'c18b02602d8b6b6db1372a1ccfe067b1bf3b44af3aed7c3d490ac2c166be13624575c2d012457478caeb0190fb415426ae7313a57060dd65c5663928ba321687'
+        '0f51ac4a2500faa66377c6f90e0f9c433032c6836aa9b6772276fc5ad792fa0f8c15d68390191c2cc887cf3649186429438dacbd0df0f5b052647e3f98f4ad93'
+        'f2a05a124d4f5dc105c959f5dceef962f867877d451c053b1ba7cca50829b961d74ac3631a5fe06ed0b79ee9388cf9c2f37cffdbd63ab2515e25a0be21a1c77e'
         'SKIP'
         '0dcbcd5288fdc2aad833b123eae81975e66b7b42a9c0a490eccb1ab49a1344452387132808220caa25af0a3684bdc56117c72e82f99f769fe1b23bc0b25e17f8')
 
