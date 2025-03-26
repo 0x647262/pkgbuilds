@@ -6,7 +6,7 @@
 
 pkgname=neovim
 pkgver=0.11.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=(x86_64)
 url=https://neovim.io
@@ -66,6 +66,7 @@ build() {
     -D CMAKE_BUILD_TYPE=RelWithDebInfo \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D USE_BUNDLED=OFF \
+    -D ENABLE_TRANSLATIONS=ON \
     -W no-dev
   cmake --build build --verbose
 }
