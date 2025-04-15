@@ -37,7 +37,6 @@ makedepends=(
   ninja
   lua51-mpack
   lua51-lpeg
-  unzip
 )
 optdepends=(
   'python-pynvim: for Python plugin support (see :help python)'
