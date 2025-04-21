@@ -8,7 +8,7 @@ pkgname=(
   dolphin-emu-tool
 )
 pkgver=2503
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -58,6 +58,7 @@ makedepends=(
   qt6-base
   qt6-svg
   #sfml
+  vulkan-headers
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
@@ -112,6 +113,7 @@ build() {
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_SKIP_RPATH=ON \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DDISTRIBUTOR=archlinux.org \
     -DENABLE_ANALYTICS=OFF \
     -DENABLE_AUTOUPDATE=OFF \
@@ -140,6 +142,13 @@ package_dolphin-emu() {
 }
 
 package_dolphin-emu-tool() {
+  depends+=(
+    alsa-lib
+    libevdev
+    libpulse
+    libudev.so
+    qt6-base
+  )
   install -Dm 755 build/Binaries/dolphin-tool -t "${pkgdir}"/usr/bin/
 }
 
