@@ -89,7 +89,7 @@ options=(
   !lto
 )
 source=(
-  "https://mesa.freedesktop.org/archive/mesa-$pkgver.tar.xz"{,.sig}
+  "https://archive.mesa3d.org/mesa-$pkgver.tar.xz"{,.sig}
   0001-docs-Fix-HTML-build-with-Sphinx-8.2.patch
 )
 validpgpkeys=(
