@@ -17,7 +17,7 @@ pkgname=(
   lib32-vulkan-virtio
   lib32-vulkan-mesa-layers
 )
-pkgver=25.1.0
+pkgver=25.1.1
 pkgrel=1
 epoch=1
 pkgdesc="Open-source OpenGL drivers - 32-bit"
@@ -117,7 +117,7 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-b2sums=('5057c6664ca135177d0ccf9cc0c6e0c6ea7efa4cff7ee626050bec1682c9e864dc684c5579eff6a9df77ac0f7280bf10e6e93474d0369de250ccf38c9dc7d104'
+b2sums=('73618405dee247f7e3141f817ab66e5bbb6256d116cc1bb3eb86ed8c9511194891d3e68b3d7d36cdc3a68fab25a231da58e3bba2da7914e8c7d55ea861d50952'
         'SKIP'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9a73962e1e38b84131ab2350b69a1f5d611c549533eec73e898c394a9b9442f357bb5d5f59e1be12270dd29bdf237dc2d21786c0c2210736e224ef5d48300dcf'
@@ -136,7 +136,7 @@ b2sums=('5057c6664ca135177d0ccf9cc0c6e0c6ea7efa4cff7ee626050bec1682c9e864dc684c5
         '8bc6f68ed286bea617a2cfaf3949bb699d3a0466faeca735314a51596ce950e4ee57eda88154bd562c1728cfaff4cdb5bc1ba701b9d47a9c50d4c4f011bee975')
 
 # https://docs.mesa3d.org/relnotes.html
-sha256sums=('b1c45888969ee5df997e2542654f735ab1b772924b442f3016d2293414c99c14'
+sha256sums=('cf942a18b7b9e9b88524dcbf0b31fed3cde18e6d52b3375b0ab6587a14415bce'
             'SKIP'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             '7f9f832470494906d1fca5329f8ab5791cc60beb230c74815dff541cbd2b5ca0'
