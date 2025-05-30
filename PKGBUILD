@@ -6,7 +6,7 @@
 
 pkgname=neovim
 pkgver=0.11.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=(x86_64)
 url=https://neovim.io
@@ -56,12 +56,6 @@ source=(
 sha512sums=('44029d443a4407e2061aa3b0d3ff6f163e2b2a1c9ccdb4482378141dfa901076a8068f75ea02b1b1d3f8e8dba20e24cd20640fb0fc09ea7647fea5c04cac35da'
             '22662462c823de243599cdd3483e46ade4ab59b219e907468d34c18e584fe7477548e357ee2ce56bb098cf54b770b108a3511703dd486f0774a65c84af78f6aa'
             '3c6ee1e4646d09c164a2212f9e4d2f53158ff32911b0972e060a395a8d4685334574a7ede995a81680dcc0750cd3327a78beb7904a4bb326b2399d79a8b12d5e')
-
-# Revert "fix(desktop): cannot open filename with spaces using OS file manager" #33684
-prepare() {
-  cd ${pkgname}
-  git cherry-pick --no-commit f9c7a69cec5a5cd229e77a66ccca841903ef6d8f
-}
 
 build() {
   cd ${pkgname}
