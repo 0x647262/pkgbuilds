@@ -18,8 +18,8 @@ pkgname=(
   vulkan-mesa-layers
   mesa-docs
 )
-pkgver=25.1.2
-pkgrel=3
+pkgver=25.1.3
+pkgrel=1
 epoch=1
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -131,7 +131,7 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-b2sums=('2c92a5fb09353034936951f75848fbc1da113a1c78391d781cecc61a8b2aed6e579f0c5e2cf95b213af0f8b8823c73dc48659cb51f124c3e1ee266bfed408189'
+b2sums=('a61698b51b769aea6926192f9a42459449a14f4d732717866814e6917a8db262ca00a0de3cd12fb6d3d6be897d2e7df34d011f29a54774efd431e987dda399e1'
         'SKIP'
         'c3b19195837900a6bcdaefcd5ce213113fe5abcabca55e4a0f0947070fe20c276a5f14b75fa2acfa31405c5949498864c3aae22f4fc2595d66d3d1fde0126235'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
@@ -151,7 +151,7 @@ b2sums=('2c92a5fb09353034936951f75848fbc1da113a1c78391d781cecc61a8b2aed6e579f0c5
         '8bc6f68ed286bea617a2cfaf3949bb699d3a0466faeca735314a51596ce950e4ee57eda88154bd562c1728cfaff4cdb5bc1ba701b9d47a9c50d4c4f011bee975')
 
 # https://docs.mesa3d.org/relnotes.html
-sha256sums=('c29c93fd35119b949a589463d1feb61b4000c0daad04e8d543d7f909f119bd97'
+sha256sums=('ffcb6cadb5fd356d56008e6308641dfe4b2929f30139f6585436ca6e3cddba7f'
             'SKIP'
             '1dcb01dcc8dcbdc3e6285f73a47f030b3e9bdb8da0c0825bec98c1b427b9ccba'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
