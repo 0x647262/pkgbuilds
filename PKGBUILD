@@ -18,7 +18,7 @@ pkgname=(
   lib32-vulkan-mesa-layers
 )
 pkgver=25.1.4
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Open-source OpenGL drivers - 32-bit"
 url="https://www.mesa3d.org/"
@@ -184,6 +184,7 @@ build() {
     -D gallium-xa=disabled
     -D gles1=disabled
     -D html-docs=disabled
+    -D legacy-x11=dri2
     -D libunwind=disabled
     -D microsoft-clc=disabled
     -D valgrind=disabled
