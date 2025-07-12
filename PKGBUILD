@@ -5,8 +5,8 @@
 # Contributor: Florian Hahn <flo@fhahn.com>
 
 pkgname=neovim
-pkgver=0.11.2
-pkgrel=4
+pkgver=0.11.3
+pkgrel=1
 pkgdesc='Fork of Vim aiming to improve user experience, plugins, and GUIs'
 arch=(x86_64)
 url=https://neovim.io
@@ -52,20 +52,10 @@ backup=(etc/xdg/nvim/sysinit.vim)
 source=(
   "git+https://github.com/neovim/neovim.git#tag=v$pkgver"
   nvimdoc{,.hook}
-  0001-build-deps-bump-tree-sitter-vim-to-v0.6.0.patch
-  0001-build-deps-bump-tree-sitter-vim-to-v0.7.0.patch
 )
-sha512sums=('44029d443a4407e2061aa3b0d3ff6f163e2b2a1c9ccdb4482378141dfa901076a8068f75ea02b1b1d3f8e8dba20e24cd20640fb0fc09ea7647fea5c04cac35da'
+sha512sums=('43dc1bb48ac6ef60087b45a5f425a6250019bbf39cb3c0a371c886ecf5ea96f6599a8e519259323eabc089e975dc4d4cfe65aa8c8cd0f8aaf1f2da8e2d08510f'
             '22662462c823de243599cdd3483e46ade4ab59b219e907468d34c18e584fe7477548e357ee2ce56bb098cf54b770b108a3511703dd486f0774a65c84af78f6aa'
-            '3c6ee1e4646d09c164a2212f9e4d2f53158ff32911b0972e060a395a8d4685334574a7ede995a81680dcc0750cd3327a78beb7904a4bb326b2399d79a8b12d5e'
-            '11eff795d8012ade867e9e084ec0f680de0eb67297bb4c6049d6ae5461fd2b31fa4aa124bb0a53ca6b5244e976b3af5d94ebcc5a035b0dcb897a722344d1b63b'
-            'dcb9b5e483043aa7abe8851f4924de7609c5d42594166e68694cd561041f1e85d1013fa4ed31dc1b222e8330b9631419cd0da42ab8de4a0387715362bc0771e3')
-
-prepare() {
-  cd ${pkgname}
-  patch --forward --strip=1 --input=../0001-build-deps-bump-tree-sitter-vim-to-v0.6.0.patch
-  patch --forward --strip=1 --input=../0001-build-deps-bump-tree-sitter-vim-to-v0.7.0.patch
-}
+            '3c6ee1e4646d09c164a2212f9e4d2f53158ff32911b0972e060a395a8d4685334574a7ede995a81680dcc0750cd3327a78beb7904a4bb326b2399d79a8b12d5e')
 
 build() {
   cd ${pkgname}
