@@ -1,5 +1,5 @@
-# Maintainer: Sven-Hendrik Haase <sh@lutzhaase.com>
 # Maintainer: Peter Jung <ptr1337@archlinux.org>
+# Contributor: Sven-Hendrik Haase <svenstaro@archlinux.org>
 # Contributor: Jan "heftig" Steffens <jan.steffens@gmail.com>
 # Contributor: Eduardo Romero <eduardo@archlinux.org>
 # Contributor: Giovanni Scafora <giovanni@archlinux.org>
