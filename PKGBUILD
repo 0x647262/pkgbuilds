@@ -7,8 +7,8 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=2503
-pkgrel=3
+pkgver=2506a
+pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -27,8 +27,8 @@ depends=(
   libcurl.so
   #libfmt.so
   libgl
-  #libsfml-network.so
-  #libsfml-system.so
+  libsfml-network.so
+  libsfml-system.so
   libspng.so
   libswscale.so
   libusb-1.0.so
@@ -57,12 +57,12 @@ makedepends=(
   python
   qt6-base
   qt6-svg
-  #sfml
+  sfml
   vulkan-headers
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_tag=9763c0a1e2b9db0c3861d25bc2f5a0ace6a15ee3
+_tag=9843115ad8414970312c954d83145300d7cdbec3
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
   git+https://github.com/mozilla/cubeb.git
@@ -77,7 +77,7 @@ source=(
   git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('33965c02b34ad449f16e267d853e4b9869902a4c74d169d3b34eb762b07167228e13df5c5dba632acf49183066bd62f947f045e83be927896bb0259adf9e7c6f'
+b2sums=('03f747ff20d7e0e4ff00c91cb1a86d6d8d70a108b55c689dddf9be58fc6ead2ff9965470975308109e95bda0f8059bc52a58d3bfbe80a001852ab6b2a375fd96'
         'SKIP'
         'SKIP'
         'SKIP'
