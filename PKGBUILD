@@ -19,7 +19,7 @@ pkgname=(
   mesa-docs
 )
 pkgver=25.2.1
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -74,7 +74,6 @@ makedepends=(
   xorgproto
 
   # mesa-only deps
-  sysprof
   valgrind
 
   # html-docs
@@ -238,7 +237,7 @@ build() {
     -D intel-rt=enabled
     -D libunwind=disabled
     -D microsoft-clc=disabled
-    -D sysprof=true
+    -D sysprof=false
     -D valgrind=enabled
     -D video-codecs=all
     -D vulkan-drivers=amd,gfxstream,intel,intel_hasvk,nouveau,swrast,virtio,microsoft-experimental
