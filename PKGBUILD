@@ -8,7 +8,9 @@ pkgbase=mesa
 pkgname=(
   mesa
   opencl-mesa
+  vulkan-asahi
   vulkan-dzn
+  vulkan-freedreno
   vulkan-gfxstream
   vulkan-intel
   vulkan-nouveau
@@ -229,7 +231,7 @@ build() {
   local meson_options=(
     -D android-libbacktrace=disabled
     -D b_ndebug=true
-    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,llvmpipe,softpipe,iris,crocus,i915,zink,d3d12
+    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,llvmpipe,softpipe,iris,crocus,i915,zink,d3d12,asahi,freedreno
     -D gallium-extra-hud=true
     -D gallium-mediafoundation=disabled
     -D gallium-rusticl=true
@@ -241,7 +243,7 @@ build() {
     -D sysprof=true
     -D valgrind=enabled
     -D video-codecs=all
-    -D vulkan-drivers=amd,gfxstream,intel,intel_hasvk,nouveau,swrast,virtio,microsoft-experimental
+    -D vulkan-drivers=amd,gfxstream,intel,intel_hasvk,nouveau,swrast,virtio,microsoft-experimental,asahi,freedreno
     -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,vram-report-limit
   )
 
@@ -316,10 +318,16 @@ package_mesa() {
     _pick opencl $libdir/libRusticlOpenCL*
     _pick opencl etc/OpenCL/vendors/rusticl.icd
 
+    _pick vkasahi $icddir/asahi_icd.*.json
+    _pick vkasahi $libdir/libvulkan_asahi.so
+
     _pick vkdzn $icddir/dzn_icd.*.json
     _pick vkdzn $libdir/libvulkan_dzn.so
     _pick vkdzn $libdir/libspirv_to_dxil.*
     _pick vkdzn usr/bin/spirv2dxil
+
+    _pick vkfreedreno $icddir/freedreno_icd.*.json
+    _pick vkfreedreno $libdir/libvulkan_freedreno.so
 
     _pick vkgfxstr $icddir/gfxstream_vk_icd.*.json
     _pick vkgfxstr $libdir/libvulkan_gfxstream.so
@@ -386,6 +394,32 @@ package_opencl-mesa() {
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
+package_vulkan-asahi() {
+  pkgdesc="Open-source Vulkan driver for Apple-GPU (Asahi)"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers-asahi: additional vulkan layers")
+  provides=(vulkan-driver)
+
+  mv vkasahi/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
 package_vulkan-dzn() {
   pkgdesc="Open-source Vulkan driver for D3D12"
   depends=(
@@ -408,6 +442,32 @@ package_vulkan-dzn() {
   provides=(vulkan-driver)
 
   mv vkdzn/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+package_vulkan-freedreno() {
+  pkgdesc="Freedreno Vulkan mesa driver"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
+
+  mv vkfreedreno/* "$pkgdir"
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
