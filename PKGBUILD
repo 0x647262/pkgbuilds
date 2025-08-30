@@ -21,7 +21,7 @@ pkgname=(
   mesa-docs
 )
 pkgver=25.2.1
-pkgrel=4
+pkgrel=5
 epoch=1
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -321,13 +321,13 @@ package_mesa() {
     _pick vkasahi $icddir/asahi_icd.*.json
     _pick vkasahi $libdir/libvulkan_asahi.so
 
-    _pick vkdzn $icddir/dzn_icd.*.json
-    _pick vkdzn $libdir/libvulkan_dzn.so
-    _pick vkdzn $libdir/libspirv_to_dxil.*
-    _pick vkdzn usr/bin/spirv2dxil
+    _pick vkd3d12 $icddir/dzn_icd.*.json
+    _pick vkd3d12 $libdir/libvulkan_dzn.so
+    _pick vkd3d12 $libdir/libspirv_to_dxil.*
+    _pick vkd3d12 usr/bin/spirv2dxil
 
-    _pick vkfreedreno $icddir/freedreno_icd.*.json
-    _pick vkfreedreno $libdir/libvulkan_freedreno.so
+    _pick vkfdreno $icddir/freedreno_icd.*.json
+    _pick vkfdreno $libdir/libvulkan_freedreno.so
 
     _pick vkgfxstr $icddir/gfxstream_vk_icd.*.json
     _pick vkgfxstr $libdir/libvulkan_gfxstream.so
@@ -395,7 +395,7 @@ package_opencl-mesa() {
 }
 
 package_vulkan-asahi() {
-  pkgdesc="Open-source Vulkan driver for Apple-GPU (Asahi)"
+  pkgdesc="Open-source Vulkan driver for Apple GPUs"
   depends=(
     expat
     gcc-libs
@@ -412,7 +412,7 @@ package_vulkan-asahi() {
     zlib
     zstd
   )
-  optdepends=("vulkan-mesa-layers-asahi: additional vulkan layers")
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
   provides=(vulkan-driver)
 
   mv vkasahi/* "$pkgdir"
@@ -441,13 +441,13 @@ package_vulkan-dzn() {
   optdepends=("vulkan-mesa-layers: additional vulkan layers")
   provides=(vulkan-driver)
 
-  mv vkdzn/* "$pkgdir"
+  mv vkd3d12/* "$pkgdir"
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-freedreno() {
-  pkgdesc="Freedreno Vulkan mesa driver"
+  pkgdesc="Open-source Vulkan driver for Adreno GPUs"
   depends=(
     expat
     gcc-libs
@@ -467,7 +467,7 @@ package_vulkan-freedreno() {
   optdepends=("vulkan-mesa-layers: additional vulkan layers")
   provides=(vulkan-driver)
 
-  mv vkfreedreno/* "$pkgdir"
+  mv vkfdreno/* "$pkgdir"
 
   install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
