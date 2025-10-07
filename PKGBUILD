@@ -9,11 +9,13 @@ pkgname=(
   mesa
   opencl-mesa
   vulkan-asahi
+  vulkan-broadcom
   vulkan-dzn
   vulkan-freedreno
   vulkan-gfxstream
   vulkan-intel
   vulkan-nouveau
+  vulkan-panfrost
   vulkan-radeon
   vulkan-swrast
   vulkan-virtio
@@ -51,6 +53,7 @@ makedepends=(
   llvm
   llvm-libs
   lm_sensors
+  python-pycparser
   rust
   spirv-llvm-translator
   spirv-tools
@@ -233,10 +236,10 @@ build() {
   local meson_options=(
     -D android-libbacktrace=disabled
     -D b_ndebug=true
-    -D gallium-drivers=asahi,crocus,d3d12,freedreno,i915,iris,llvmpipe,nouveau,r300,r600,radeonsi,softpipe,svga,virgl,zink
+    -D gallium-drivers=all
     -D gallium-extra-hud=true
     -D gallium-mediafoundation=disabled
-    -D gallium-rusticl-enable-drivers=asahi,freedreno,radeonsi
+    -D gallium-rusticl-enable-drivers=all
     -D gallium-rusticl=true
     -D gles1=disabled
     -D html-docs=enabled
@@ -246,7 +249,7 @@ build() {
     -D sysprof=true
     -D valgrind=enabled
     -D video-codecs=all
-    -D vulkan-drivers=amd,freedreno,intel,intel_hasvk,swrast,virtio,microsoft-experimental,nouveau,asahi,gfxstream
+    -D vulkan-drivers=all
     -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,anti-lag,vram-report-limit
   )
 
@@ -320,6 +323,9 @@ package_mesa() {
     _pick vkasahi $icddir/asahi_icd.*.json
     _pick vkasahi $libdir/libvulkan_asahi.so
 
+    _pick vkbroadcom $icddir/broadcom_icd.*.json
+    _pick vkbroadcom $libdir/libvulkan_broadcom.so
+
     _pick vkd3d12 $icddir/dzn_icd.*.json
     _pick vkd3d12 $libdir/libvulkan_dzn.so
     _pick vkd3d12 $libdir/libspirv_to_dxil.*
@@ -336,6 +342,9 @@ package_mesa() {
 
     _pick vknvidia $icddir/nouveau_icd.*.json
     _pick vknvidia $libdir/libvulkan_nouveau.so
+
+    _pick vkpanfrost $icddir/panfrost_icd.*.json
+    _pick vkpanfrost $libdir/libvulkan_panfrost.so
 
     _pick vkradeon $icddir/radeon_icd.*.json
     _pick vkradeon $libdir/libvulkan_radeon.so
@@ -423,6 +432,33 @@ package_vulkan-asahi() {
   mv vkasahi/* "$pkgdir"
 
   install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+package_vulkan-broadcom() {
+  pkgdesc="Open-source Vulkan driver for Broadcom GPUs"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    vulkan-mesa-implicit-layers
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
+
+  mv vkbroadcom/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-dzn() {
@@ -560,6 +596,33 @@ package_vulkan-nouveau() {
   mv vknvidia/* "$pkgdir"
 
   install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+package_vulkan-panfrost() {
+  pkgdesc="Open-source Vulkan driver for Panfrost GPUs"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    vulkan-mesa-implicit-layers
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
+
+  mv vkpanfrost/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-radeon() {
