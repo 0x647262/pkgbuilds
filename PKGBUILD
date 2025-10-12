@@ -21,7 +21,7 @@ pkgname=(
   lib32-vulkan-mesa-layers
 )
 pkgver=25.2.4
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Open-source OpenGL drivers - 32-bit"
 url="https://www.mesa3d.org/"
