@@ -22,7 +22,7 @@ pkgname=(
   mesa-docs
 )
 pkgver=25.2.4
-pkgrel=3
+pkgrel=4
 epoch=1
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
