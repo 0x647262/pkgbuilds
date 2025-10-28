@@ -343,6 +343,7 @@ pkgname = vulkan-radeon
 	depends = zstd
 	optdepends = vulkan-mesa-layers: additional vulkan layers
 	provides = vulkan-driver
+	replaces = amdvlk<=2025.Q2.1-1
 
 pkgname = vulkan-swrast
 	pkgdesc = Open-source Vulkan driver for CPUs (Software Rasterizer)
