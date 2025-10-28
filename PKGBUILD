@@ -589,6 +589,7 @@ package_lib32-vulkan-radeon() {
   )
   optdepends=("lib32-vulkan-mesa-layers: additional vulkan layers")
   provides=(lib32-vulkan-driver)
+  replaces=('lib32-amdvlk<=2025.Q2.1-1')
 
   mv vkradeon/* "$pkgdir"
 
