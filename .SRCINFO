@@ -397,6 +397,7 @@ pkgname = lib32-vulkan-virtio
 
 pkgname = lib32-vulkan-mesa-implicit-layers
 	pkgdesc = Mesa's implicit Vulkan layers - 32-bit
+	depends = lib32-gcc-libs
 	depends = lib32-glibc
 	depends = lib32-libdrm
 	depends = lib32-libxcb

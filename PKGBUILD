@@ -659,6 +659,7 @@ package_lib32-vulkan-virtio() {
 package_lib32-vulkan-mesa-implicit-layers() {
   pkgdesc="Mesa's implicit Vulkan layers - 32-bit"
   depends=(
+    lib32-gcc-libs
     lib32-glibc
     lib32-libdrm
     lib32-libxcb
