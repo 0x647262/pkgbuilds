@@ -20,7 +20,7 @@ pkgname=(
   lib32-vulkan-mesa-device-select
   lib32-vulkan-mesa-layers
 )
-pkgver=25.2.7
+pkgver=25.3.0
 _pkgver=${pkgver/[a-z]/-&}
 pkgrel=1
 epoch=1
@@ -34,12 +34,12 @@ makedepends=(
   lib32-expat
   lib32-gcc-libs
   lib32-glibc
+  lib32-libdisplay-info
   lib32-libdrm
   lib32-libelf
   lib32-libglvnd
   lib32-libpng
   lib32-libva
-  lib32-libvdpau
   lib32-libx11
   lib32-libxcb
   lib32-libxext
@@ -85,10 +85,6 @@ options=(
 )
 source=(
   "https://archive.mesa3d.org/mesa-$_pkgver.tar.xz"{,.sig}
-
-  # Fix DotA 2 hangs
-  # https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/38017
-  0001-anv-fix-FS-output-attachment-map-building.patch
 )
 validpgpkeys=(
   946D09B5E4C9845E63075FF1D961C596A7203456 # Andres Gomez <tanty@igalia.com>
@@ -132,7 +128,7 @@ declare -A _crates=(
 
 # Used to generate the above table
 _gencrates() {
-  grep crates.io subprojects/*.wrap | \
+  grep '^source_url' subprojects/*-rs.wrap | \
     sed -r 's|.*crates/([^/]+)/([0-9.]+)/download|\1 \2|' | \
     column -t -S 2 | sed 's/^/  /'
 }
@@ -144,9 +140,8 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-b2sums=('7e834275fc23760e76c944cd83440e26bbc6286bb4bad75d7344a62934dc472e9f9f24a756e3b7488a617c2934dbdefd91bf79847ea09b5767ea3ccc2fdf5173'
+b2sums=('54cd99f9a4f14bf070f5525a91a776f0b7042ce7c056bf8db388baa5c98e0065799cdc376c0c42205b08eff18f252b6e7be5987e44fb628b97a360a7e89c300f'
         'SKIP'
-        'ee9be38d036aad299b3ecd32b2ca3fca5534c6ab329bb0d9f841ce5911d5f6a0fcdab2219b7a3a849f585863c313465ea3160e201b23ce3a80a2bfeaaabd06bc'
         '431439d31632d177aeb15f910b4f546efa76d54fc74fc8e140399dc5e54eca33fd606f11dbfb48fa83067c8474ee512e62751895d5948367b65ab08b984284e5'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9a73962e1e38b84131ab2350b69a1f5d611c549533eec73e898c394a9b9442f357bb5d5f59e1be12270dd29bdf237dc2d21786c0c2210736e224ef5d48300dcf'
@@ -176,9 +171,8 @@ b2sums=('7e834275fc23760e76c944cd83440e26bbc6286bb4bad75d7344a62934dc472e9f9f24a
         '93385f64103fdb482bec34c7912474ae7a5935948715e6eb9a54907e0db5c39f089f6cd393bab33c935c59a1bbb0f4099431f206343811c1a450554d96a35756')
 
 # https://docs.mesa3d.org/relnotes.html
-sha256sums=('b40232a642011820211aab5a9cdf754e106b0bce15044bc4496b0ac9615892ad'
+sha256sums=('0fd54fea7dbbddb154df05ac752b18621f26d97e27863db3be951417c6abe8ae'
             'SKIP'
-            '58e81f7d5f38c837f6414f4eb8ba150b21309d02a2060559556e47a3c67cc2fe'
             '67914ab451f3bfd2e69e5e9d2ef3858484e7074d63f204fd166ec391b54de21d'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             '7f9f832470494906d1fca5329f8ab5791cc60beb230c74815dff541cbd2b5ca0'
@@ -294,20 +288,16 @@ package_lib32-mesa() {
   provides=(
     "lib32-libva-mesa-driver=$epoch:$pkgver-$pkgrel"
     "lib32-mesa-libgl=$epoch:$pkgver-$pkgrel"
-    "lib32-mesa-vdpau=$epoch:$pkgver-$pkgrel"
     lib32-libva-driver
     lib32-opengl-driver
-    lib32-vdpau-driver
   )
   conflicts=(
     'lib32-libva-mesa-driver<1:24.2.7-1'
     'lib32-mesa-libgl<17.0.1-2'
-    'lib32-mesa-vdpau<1:24.2.7-1'
   )
   replaces=(
     'lib32-libva-mesa-driver<1:24.2.7-1'
     'lib32-mesa-libgl<17.0.1-2'
-    'lib32-mesa-vdpau<1:24.2.7-1'
   )
 
   meson install -C build --destdir "$pkgdir" --no-rebuild
@@ -399,6 +389,7 @@ package_lib32-vulkan-asahi() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
@@ -428,6 +419,7 @@ package_lib32-vulkan-dzn() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
@@ -457,6 +449,7 @@ package_lib32-vulkan-freedreno() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
@@ -486,6 +479,7 @@ package_lib32-vulkan-gfxstream() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
@@ -512,6 +506,7 @@ package_lib32-vulkan-intel() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
@@ -541,6 +536,7 @@ package_lib32-vulkan-nouveau() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
@@ -570,6 +566,7 @@ package_lib32-vulkan-radeon() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libelf
     lib32-libx11
@@ -602,6 +599,7 @@ package_lib32-vulkan-swrast() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
@@ -634,6 +632,7 @@ package_lib32-vulkan-virtio() {
     lib32-expat
     lib32-gcc-libs
     lib32-glibc
+    lib32-libdisplay-info
     lib32-libdrm
     lib32-libx11
     lib32-libxcb
