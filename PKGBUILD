@@ -17,13 +17,13 @@ pkgname=(
   vulkan-radeon
   vulkan-swrast
   vulkan-virtio
-  vulkan-mesa-device-select
+  vulkan-mesa-implicit-layers
   vulkan-mesa-layers
   mesa-docs
 )
 pkgver=25.3.0
 _pkgver=${pkgver/[a-z]/-&}
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -245,8 +245,8 @@ build() {
     -D sysprof=true
     -D valgrind=enabled
     -D video-codecs=all
-    -D vulkan-drivers=amd,gfxstream,intel,intel_hasvk,nouveau,swrast,virtio,microsoft-experimental,asahi,freedreno
-    -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,vram-report-limit
+    -D vulkan-drivers=amd,freedreno,intel,intel_hasvk,swrast,virtio,microsoft-experimental,nouveau,asahi,gfxstream
+    -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,anti-lag,vram-report-limit
   )
 
   # Build only minimal debug info to reduce size
@@ -346,6 +346,7 @@ package_mesa() {
     _pick vkvirtio $icddir/virtio_icd.*.json
     _pick vkvirtio $libdir/libvulkan_virtio.so
 
+    _pick vkdevice $libdir/libVkLayer_MESA_anti_lag.so
     _pick vkdevice $libdir/libVkLayer_MESA_device_select.so
     _pick vkdevice usr/share/vulkan/implicit_layer.d
 
@@ -409,7 +410,7 @@ package_vulkan-asahi() {
     spirv-tools
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -437,7 +438,7 @@ package_vulkan-dzn() {
     spirv-tools
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -465,7 +466,7 @@ package_vulkan-freedreno() {
     spirv-tools
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -492,7 +493,7 @@ package_vulkan-gfxstream() {
     libxshmfence
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
   )
@@ -518,7 +519,7 @@ package_vulkan-intel() {
     spirv-tools
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -546,7 +547,7 @@ package_vulkan-nouveau() {
     spirv-tools
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -576,7 +577,7 @@ package_vulkan-radeon() {
     spirv-tools
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -606,7 +607,7 @@ package_vulkan-swrast() {
     spirv-tools
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -635,7 +636,7 @@ package_vulkan-virtio() {
     libxshmfence
     systemd-libs
     vulkan-icd-loader
-    vulkan-mesa-device-select
+    vulkan-mesa-implicit-layers
     wayland
     xcb-util-keysyms
     zlib
@@ -649,14 +650,16 @@ package_vulkan-virtio() {
   install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_vulkan-mesa-device-select() {
-  pkgdesc="Mesa's Vulkan Device Select layer"
+package_vulkan-mesa-implicit-layers() {
+  pkgdesc="Mesa's implicit Vulkan layers"
   depends=(
     glibc
     libdrm
     libxcb
     wayland
   )
+  conflicts=(vulkan-mesa-device-select)
+  replaces=(vulkan-mesa-device-select)
 
   mv vkdevice/* "$pkgdir"
 
@@ -664,7 +667,7 @@ package_vulkan-mesa-device-select() {
 }
 
 package_vulkan-mesa-layers() {
-  pkgdesc="Mesa's Vulkan layers"
+  pkgdesc="Mesa's explicit Vulkan layers"
   depends=(
     gcc-libs
     glibc
