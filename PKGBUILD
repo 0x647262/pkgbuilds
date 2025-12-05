@@ -233,7 +233,7 @@ build() {
   local meson_options=(
     -D android-libbacktrace=disabled
     -D b_ndebug=true
-    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,llvmpipe,softpipe,iris,crocus,i915,zink,d3d12,asahi,freedreno
+    -D gallium-drivers=asahi,crocus,d3d12,freedreno,i915,iris,llvmpipe,nouveau,r300,r600,radeonsi,softpipe,svga,virgl,zink
     -D gallium-extra-hud=true
     -D gallium-mediafoundation=disabled
     -D gallium-rusticl=true
