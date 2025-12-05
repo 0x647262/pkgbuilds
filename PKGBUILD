@@ -22,7 +22,7 @@ pkgname=(
 )
 pkgver=25.3.1
 _pkgver=${pkgver/[a-z]/-&}
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Open-source OpenGL drivers - 32-bit"
 url="https://www.mesa3d.org/"
@@ -225,9 +225,10 @@ build() {
     --cross-file lib32
     -D android-libbacktrace=disabled
     -D b_ndebug=true
-    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,llvmpipe,softpipe,iris,crocus,i915,zink,d3d12,asahi,freedreno
+    -D gallium-drivers=asahi,crocus,d3d12,freedreno,i915,iris,llvmpipe,nouveau,r300,r600,radeonsi,softpipe,svga,virgl,zink
     -D gallium-extra-hud=true
     -D gallium-mediafoundation=disabled
+    -D gallium-rusticl-enable-drivers=asahi,freedreno,radeonsi
     -D gallium-rusticl=true
     -D gles1=disabled
     -D html-docs=disabled
