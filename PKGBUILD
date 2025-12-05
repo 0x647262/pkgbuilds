@@ -236,6 +236,7 @@ build() {
     -D gallium-drivers=asahi,crocus,d3d12,freedreno,i915,iris,llvmpipe,nouveau,r300,r600,radeonsi,softpipe,svga,virgl,zink
     -D gallium-extra-hud=true
     -D gallium-mediafoundation=disabled
+    -D gallium-rusticl-enable-drivers=asahi,freedreno,radeonsi
     -D gallium-rusticl=true
     -D gles1=disabled
     -D html-docs=enabled
