@@ -7,8 +7,8 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=2506a
-pkgrel=2
+pkgver=2509
+pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -62,7 +62,7 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_tag=9843115ad8414970312c954d83145300d7cdbec3
+_tag=f0519d4f6cfa650846674d0b15849035b4c27e74
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
   git+https://github.com/mozilla/cubeb.git
@@ -75,9 +75,11 @@ source=(
   git+https://github.com/KhronosGroup/SPIRV-Cross.git
   git+https://github.com/syoyo/tinygltf.git
   git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+  git+https://github.com/e-dant/watcher.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('03f747ff20d7e0e4ff00c91cb1a86d6d8d70a108b55c689dddf9be58fc6ead2ff9965470975308109e95bda0f8059bc52a58d3bfbe80a001852ab6b2a375fd96'
+b2sums=('6405ec0f50fec312da1e093773db34421ff0c9a2bbcf7e86f7521a1e68a07048558d7fbdd6513df39c126c666e58b755e54fe9de8e48382ffd461475964ec446'
+        'SKIP'
         'SKIP'
         'SKIP'
         'SKIP'
@@ -92,7 +94,8 @@ b2sums=('03f747ff20d7e0e4ff00c91cb1a86d6d8d70a108b55c689dddf9be58fc6ead2ff996547
 
 prepare() {
   cd dolphin-emu
-  for submodule in Externals/{cubeb/cubeb,implot/implot,fmt/fmt,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
+  git cherry-pick -n b3bdad416ca0a6a604dca12bed7bd00542092d25
+  for submodule in Externals/{cubeb/cubeb,implot/implot,fmt/fmt,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,watcher,zlib-ng/zlib-ng}; do
     git submodule init ${submodule}
     git config submodule.${submodule}.url ../${submodule##*/}
     git -c protocol.file.allow=always submodule update ${submodule}

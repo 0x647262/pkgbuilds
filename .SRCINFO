@@ -1,7 +1,7 @@
 pkgbase = dolphin-emu
 	pkgdesc = A Gamecube and Wii emulator
-	pkgver = 2506a
-	pkgrel = 2
+	pkgver = 2509
+	pkgrel = 1
 	epoch = 1
 	url = https://dolphin-emu.org
 	arch = x86_64
@@ -50,7 +50,7 @@ pkgbase = dolphin-emu
 	optdepends = pulseaudio: PulseAudio backend
 	options = !emptydirs
 	options = !lto
-	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=9843115ad8414970312c954d83145300d7cdbec3
+	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=f0519d4f6cfa650846674d0b15849035b4c27e74
 	source = git+https://github.com/mozilla/cubeb.git
 	source = git+https://github.com/epezent/implot.git
 	source = git+https://github.com/fmtlib/fmt.git
@@ -61,8 +61,10 @@ pkgbase = dolphin-emu
 	source = git+https://github.com/KhronosGroup/SPIRV-Cross.git
 	source = git+https://github.com/syoyo/tinygltf.git
 	source = git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+	source = git+https://github.com/e-dant/watcher.git
 	source = git+https://github.com/zlib-ng/zlib-ng.git
-	b2sums = 03f747ff20d7e0e4ff00c91cb1a86d6d8d70a108b55c689dddf9be58fc6ead2ff9965470975308109e95bda0f8059bc52a58d3bfbe80a001852ab6b2a375fd96
+	b2sums = 6405ec0f50fec312da1e093773db34421ff0c9a2bbcf7e86f7521a1e68a07048558d7fbdd6513df39c126c666e58b755e54fe9de8e48382ffd461475964ec446
+	b2sums = SKIP
 	b2sums = SKIP
 	b2sums = SKIP
 	b2sums = SKIP
