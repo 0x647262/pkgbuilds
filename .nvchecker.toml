@@ -1,5 +1,4 @@
 [neovim]
-source = "github"
-github = "neovim/neovim"
+source = "git"
+git = "https://github.com/neovim/neovim.git"
 prefix = "v"
-use_max_tag = true
