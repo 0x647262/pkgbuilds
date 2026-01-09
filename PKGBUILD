@@ -16,6 +16,7 @@ pkgname=(
   vulkan-intel
   vulkan-nouveau
   vulkan-panfrost
+  vulkan-powervr
   vulkan-radeon
   vulkan-swrast
   vulkan-virtio
@@ -25,7 +26,7 @@ pkgname=(
 )
 pkgver=25.3.3
 _pkgver=${pkgver/[a-z]/-&}
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -53,7 +54,6 @@ makedepends=(
   llvm
   llvm-libs
   lm_sensors
-  python-pycparser
   rust
   spirv-llvm-translator
   spirv-tools
@@ -75,6 +75,7 @@ makedepends=(
   python-mako
   python-packaging
   python-ply
+  python-pycparser
   python-yaml
   rust-bindgen
   wayland-protocols
@@ -323,8 +324,8 @@ package_mesa() {
     _pick vkasahi $icddir/asahi_icd.*.json
     _pick vkasahi $libdir/libvulkan_asahi.so
 
-    _pick vkbroadcom $icddir/broadcom_icd.*.json
-    _pick vkbroadcom $libdir/libvulkan_broadcom.so
+    _pick vkbrcom $icddir/broadcom_icd.*.json
+    _pick vkbrcom $libdir/libvulkan_broadcom.so
 
     _pick vkd3d12 $icddir/dzn_icd.*.json
     _pick vkd3d12 $libdir/libvulkan_dzn.so
@@ -343,8 +344,11 @@ package_mesa() {
     _pick vknvidia $icddir/nouveau_icd.*.json
     _pick vknvidia $libdir/libvulkan_nouveau.so
 
-    _pick vkpanfrost $icddir/panfrost_icd.*.json
-    _pick vkpanfrost $libdir/libvulkan_panfrost.so
+    _pick vkpfrost $icddir/panfrost_icd.*.json
+    _pick vkpfrost $libdir/libvulkan_panfrost.so
+
+    _pick vkpowrvr $icddir/powervr_mesa_icd.*.json
+    _pick vkpowrvr $libdir/libvulkan_powervr_mesa.so
 
     _pick vkradeon $icddir/radeon_icd.*.json
     _pick vkradeon $libdir/libvulkan_radeon.so
@@ -435,11 +439,12 @@ package_vulkan-asahi() {
 }
 
 package_vulkan-broadcom() {
-  pkgdesc="Open-source Vulkan driver for Broadcom GPUs"
+  pkgdesc="Open-source Vulkan driver for VideoCore GPUs"
   depends=(
     expat
     gcc-libs
     glibc
+    libdisplay-info
     libdrm
     libx11
     libxcb
@@ -456,9 +461,9 @@ package_vulkan-broadcom() {
   optdepends=("vulkan-mesa-layers: additional vulkan layers")
   provides=(vulkan-driver)
 
-  mv vkbroadcom/* "$pkgdir"
+  mv vkbrcom/* "$pkgdir"
 
-  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-dzn() {
@@ -599,11 +604,12 @@ package_vulkan-nouveau() {
 }
 
 package_vulkan-panfrost() {
-  pkgdesc="Open-source Vulkan driver for Panfrost GPUs"
+  pkgdesc="Open-source Vulkan driver for Mali GPUs"
   depends=(
     expat
     gcc-libs
     glibc
+    libdisplay-info
     libdrm
     libx11
     libxcb
@@ -620,9 +626,37 @@ package_vulkan-panfrost() {
   optdepends=("vulkan-mesa-layers: additional vulkan layers")
   provides=(vulkan-driver)
 
-  mv vkpanfrost/* "$pkgdir"
+  mv vkpfrost/* "$pkgdir"
 
-  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+package_vulkan-powervr() {
+  pkgdesc="Open-source Vulkan driver for PowerVR GPUs"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdisplay-info
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    vulkan-mesa-implicit-layers
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
+
+  mv vkpowrvr/* "$pkgdir"
+
+  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-radeon() {

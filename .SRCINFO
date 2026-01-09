@@ -1,7 +1,7 @@
 pkgbase = mesa
 	pkgdesc = Open-source OpenGL drivers
 	pkgver = 25.3.3
-	pkgrel = 1
+	pkgrel = 2
 	epoch = 1
 	url = https://www.mesa3d.org/
 	arch = x86_64
@@ -27,7 +27,6 @@ pkgbase = mesa
 	makedepends = llvm
 	makedepends = llvm-libs
 	makedepends = lm_sensors
-	makedepends = python-pycparser
 	makedepends = rust
 	makedepends = spirv-llvm-translator
 	makedepends = spirv-tools
@@ -47,6 +46,7 @@ pkgbase = mesa
 	makedepends = python-mako
 	makedepends = python-packaging
 	makedepends = python-ply
+	makedepends = python-pycparser
 	makedepends = python-yaml
 	makedepends = rust-bindgen
 	makedepends = wayland-protocols
@@ -169,8 +169,8 @@ pkgname = mesa
 	depends = zlib
 	depends = zstd
 	optdepends = opengl-man-pages: for the OpenGL API man pages
-	provides = libva-mesa-driver=1:25.3.3-1
-	provides = mesa-libgl=1:25.3.3-1
+	provides = libva-mesa-driver=1:25.3.3-2
+	provides = mesa-libgl=1:25.3.3-2
 	provides = libva-driver
 	provides = opengl-driver
 	conflicts = libva-mesa-driver<1:24.2.7-1
@@ -221,10 +221,11 @@ pkgname = vulkan-asahi
 	provides = vulkan-driver
 
 pkgname = vulkan-broadcom
-	pkgdesc = Open-source Vulkan driver for Broadcom GPUs
+	pkgdesc = Open-source Vulkan driver for VideoCore GPUs
 	depends = expat
 	depends = gcc-libs
 	depends = glibc
+	depends = libdisplay-info
 	depends = libdrm
 	depends = libx11
 	depends = libxcb
@@ -343,10 +344,32 @@ pkgname = vulkan-nouveau
 	provides = vulkan-driver
 
 pkgname = vulkan-panfrost
-	pkgdesc = Open-source Vulkan driver for Panfrost GPUs
+	pkgdesc = Open-source Vulkan driver for Mali GPUs
 	depends = expat
 	depends = gcc-libs
 	depends = glibc
+	depends = libdisplay-info
+	depends = libdrm
+	depends = libx11
+	depends = libxcb
+	depends = libxshmfence
+	depends = spirv-tools
+	depends = systemd-libs
+	depends = vulkan-icd-loader
+	depends = vulkan-mesa-implicit-layers
+	depends = wayland
+	depends = xcb-util-keysyms
+	depends = zlib
+	depends = zstd
+	optdepends = vulkan-mesa-layers: additional vulkan layers
+	provides = vulkan-driver
+
+pkgname = vulkan-powervr
+	pkgdesc = Open-source Vulkan driver for PowerVR GPUs
+	depends = expat
+	depends = gcc-libs
+	depends = glibc
+	depends = libdisplay-info
 	depends = libdrm
 	depends = libx11
 	depends = libxcb
