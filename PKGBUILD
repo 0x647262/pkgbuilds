@@ -7,8 +7,8 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=2503
-pkgrel=2
+pkgver=2509
+pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -27,8 +27,8 @@ depends=(
   libcurl.so
   #libfmt.so
   libgl
-  #libsfml-network.so
-  #libsfml-system.so
+  libsfml-network.so
+  libsfml-system.so
   libspng.so
   libswscale.so
   libusb-1.0.so
@@ -57,12 +57,12 @@ makedepends=(
   python
   qt6-base
   qt6-svg
-  #sfml
+  sfml
   vulkan-headers
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_tag=9763c0a1e2b9db0c3861d25bc2f5a0ace6a15ee3
+_tag=f0519d4f6cfa650846674d0b15849035b4c27e74
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
   git+https://github.com/mozilla/cubeb.git
@@ -75,9 +75,11 @@ source=(
   git+https://github.com/KhronosGroup/SPIRV-Cross.git
   git+https://github.com/syoyo/tinygltf.git
   git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+  git+https://github.com/e-dant/watcher.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('33965c02b34ad449f16e267d853e4b9869902a4c74d169d3b34eb762b07167228e13df5c5dba632acf49183066bd62f947f045e83be927896bb0259adf9e7c6f'
+b2sums=('6405ec0f50fec312da1e093773db34421ff0c9a2bbcf7e86f7521a1e68a07048558d7fbdd6513df39c126c666e58b755e54fe9de8e48382ffd461475964ec446'
+        'SKIP'
         'SKIP'
         'SKIP'
         'SKIP'
@@ -92,7 +94,8 @@ b2sums=('33965c02b34ad449f16e267d853e4b9869902a4c74d169d3b34eb762b07167228e13df5
 
 prepare() {
   cd dolphin-emu
-  for submodule in Externals/{cubeb/cubeb,implot/implot,fmt/fmt,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,zlib-ng/zlib-ng}; do
+  git cherry-pick -n b3bdad416ca0a6a604dca12bed7bd00542092d25
+  for submodule in Externals/{cubeb/cubeb,implot/implot,fmt/fmt,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,watcher,zlib-ng/zlib-ng}; do
     git submodule init ${submodule}
     git config submodule.${submodule}.url ../${submodule##*/}
     git -c protocol.file.allow=always submodule update ${submodule}
