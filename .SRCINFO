@@ -1,6 +1,6 @@
 pkgbase = wine
 	pkgdesc = A compatibility layer for running Windows programs
-	pkgver = 11.2
+	pkgver = 11.3
 	pkgrel = 1
 	url = https://www.winehq.org
 	install = wine.install
@@ -68,13 +68,13 @@ pkgbase = wine
 	optdepends = wine-mono
 	options = !lto
 	options = pestrip
-	source = git+https://gitlab.winehq.org/wine/wine.git?signed#tag=wine-11.2
+	source = git+https://gitlab.winehq.org/wine/wine.git?signed#tag=wine-11.3
 	source = 30-win32-aliases.conf
 	source = wine-binfmt.conf
 	source = ntsync.conf
 	validpgpkeys = 5AC1A08B03BD7A313E0A955AF5E6E9EEB9461DD7
 	validpgpkeys = DA23579A74D4AD9AF9D3F945CEFAC8EAAF17519D
-	sha512sums = 763e0ef85de694edc189649d14fbb9ada9de24031875e8bf5789c95022efc30bcba287d3d85be23288e433ac65ed0fb80e3959b31d1e1de424b84d7d151abaa3
+	sha512sums = fdf467113de72d0bc5afbe1236de9db2c7e680711699c30ead9744ad0f6e1412fe2e27c530e14ab7679719d6a722c994fa6596a7b8068d5a5d188fe00592f02c
 	sha512sums = 6e54ece7ec7022b3c9d94ad64bdf1017338da16c618966e8baf398e6f18f80f7b0576edf1d1da47ed77b96d577e4cbb2bb0156b0b11c183a0accf22654b0a2bb
 	sha512sums = bdde7ae015d8a98ba55e84b86dc05aca1d4f8de85be7e4bd6187054bfe4ac83b5a20538945b63fb073caab78022141e9545685e4e3698c97ff173cf30859e285
 	sha512sums = ac2bd634838ffe6b90f2637e229013f0993fc1013271dbeefd216dc262a8bb79e4a5ce15a75cbfcb0c3b521d32f4ebe1ed25a6b066b99cc327b60bd6d7212e6f
