@@ -30,14 +30,19 @@ depends=(
   desktop-file-utils
   fontconfig
   freetype2
-  gcc-libs
+  libgcc
   gettext
+  glib2
+  glibc
   libpcap
   libunwind
+  libx11
   libxcursor
+  libxext
   libxkbcommon
   libxi
   libxrandr
+  systemd-libs
   wayland
 )
 makedepends=(
@@ -78,12 +83,15 @@ optdepends=(
   gst-plugins-base-libs
   gst-plugins-good
   gst-plugins-ugly
+  gstreamer
   libgphoto2
   libpulse
+  libusb
   libxcomposite
   libxinerama
   opencl-icd-loader
   pcsclite
+  perl
   samba
   sane
   sdl2
