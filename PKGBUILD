@@ -26,7 +26,7 @@ pkgname=(
 )
 pkgver=26.0.1
 _pkgver=${pkgver/[a-z]/-&}
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Open-source OpenGL drivers - 32-bit"
 url="https://www.mesa3d.org/"
