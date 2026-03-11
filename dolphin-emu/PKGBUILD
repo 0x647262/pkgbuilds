@@ -123,6 +123,7 @@ build() {
     -DENABLE_LTO=OFF \
     -DENABLE_TESTS=OFF \
     -DUSE_MGBA=ON \
+    -DUSE_SYSTEM_LIBMGBA=OFF \
     -Wno-dev
   cmake --build build
 }
