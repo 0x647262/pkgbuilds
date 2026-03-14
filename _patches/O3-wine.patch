@@ -1,0 +1,15 @@
+diff --git a/wine/PKGBUILD b/wine/PKGBUILD
+index f4bb59a..660362b 100644
+--- a/wine/PKGBUILD
++++ b/wine/PKGBUILD
+@@ -110,8 +110,8 @@ prepare() {
+ 
+ build() {
+   # Apply flags for cross-compilation
+-  export CROSSCFLAGS="-O2 -pipe -g"
+-  export CROSSCXXFLAGS="-O2 -pipe -g"
++  export CROSSCFLAGS="-O3 -pipe -g"
++  export CROSSCXXFLAGS="-O3 -pipe -g"
+   export CROSSLDFLAGS="-Wl,-O1"
+ 
+   # Make sure correct source file paths are recorded in debug information,

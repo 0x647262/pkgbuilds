@@ -1,5 +1,8 @@
 *.pkg.tar.zst
 
+*/pkg/
+*/src/
+
 dolphin-emu/SPIRV-Cross/
 dolphin-emu/VulkanMemoryAllocator/
 dolphin-emu/cpp-ipc/
@@ -11,10 +14,10 @@ dolphin-emu/imgui/
 dolphin-emu/implot/
 dolphin-emu/mgba/
 dolphin-emu/minizip-ng/
-dolphin-emu/pkg/
 dolphin-emu/rcheevos/
 dolphin-emu/sanitizers-cmake/
-dolphin-emu/src/
 dolphin-emu/tinygltf/
 dolphin-emu/watcher/
 dolphin-emu/zlib-ng/
+
+wine/wine
