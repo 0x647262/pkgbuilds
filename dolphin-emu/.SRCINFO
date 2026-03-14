@@ -1,6 +1,6 @@
 pkgbase = dolphin-emu
 	pkgdesc = A Gamecube and Wii emulator
-	pkgver = 2509
+	pkgver = 2512
 	pkgrel = 1
 	epoch = 1
 	url = https://dolphin-emu.org
@@ -50,8 +50,11 @@ pkgbase = dolphin-emu
 	optdepends = pulseaudio: PulseAudio backend
 	options = !emptydirs
 	options = !lto
-	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=f0519d4f6cfa650846674d0b15849035b4c27e74
+	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
+	source = git+https://github.com/mutouyun/cpp-ipc.git
+	source = git+https://github.com/weisslj/cpp-optparse.git
 	source = git+https://github.com/mozilla/cubeb.git
+	source = git+https://github.com/ocornut/imgui.git
 	source = git+https://github.com/epezent/implot.git
 	source = git+https://github.com/fmtlib/fmt.git
 	source = git+https://github.com/mgba-emu/mgba.git
@@ -63,7 +66,10 @@ pkgbase = dolphin-emu
 	source = git+https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
 	source = git+https://github.com/e-dant/watcher.git
 	source = git+https://github.com/zlib-ng/zlib-ng.git
-	b2sums = 6405ec0f50fec312da1e093773db34421ff0c9a2bbcf7e86f7521a1e68a07048558d7fbdd6513df39c126c666e58b755e54fe9de8e48382ffd461475964ec446
+	b2sums = 290af3a2d6825ccb17578e6c6105cdf29b8708a8dd59982693d1c5bbc56f06f4d82a069d8615a1a55908f7dbc1e460f7b43f883ad96381ee13ca9c7448caad47
+	b2sums = SKIP
+	b2sums = SKIP
+	b2sums = SKIP
 	b2sums = SKIP
 	b2sums = SKIP
 	b2sums = SKIP

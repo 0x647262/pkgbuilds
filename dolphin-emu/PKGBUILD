@@ -7,7 +7,7 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=2509
+pkgver=2512
 pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
@@ -62,10 +62,13 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_tag=f0519d4f6cfa650846674d0b15849035b4c27e74
+_tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
 source=(
   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
+  git+https://github.com/mutouyun/cpp-ipc.git
+  git+https://github.com/weisslj/cpp-optparse.git
   git+https://github.com/mozilla/cubeb.git
+  git+https://github.com/ocornut/imgui.git
   git+https://github.com/epezent/implot.git
   git+https://github.com/fmtlib/fmt.git
   git+https://github.com/mgba-emu/mgba.git
@@ -78,7 +81,10 @@ source=(
   git+https://github.com/e-dant/watcher.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('6405ec0f50fec312da1e093773db34421ff0c9a2bbcf7e86f7521a1e68a07048558d7fbdd6513df39c126c666e58b755e54fe9de8e48382ffd461475964ec446'
+b2sums=('290af3a2d6825ccb17578e6c6105cdf29b8708a8dd59982693d1c5bbc56f06f4d82a069d8615a1a55908f7dbc1e460f7b43f883ad96381ee13ca9c7448caad47'
+        'SKIP'
+        'SKIP'
+        'SKIP'
         'SKIP'
         'SKIP'
         'SKIP'
@@ -94,8 +100,7 @@ b2sums=('6405ec0f50fec312da1e093773db34421ff0c9a2bbcf7e86f7521a1e68a07048558d7fb
 
 prepare() {
   cd dolphin-emu
-  git cherry-pick -n b3bdad416ca0a6a604dca12bed7bd00542092d25
-  for submodule in Externals/{cubeb/cubeb,implot/implot,fmt/fmt,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,watcher,zlib-ng/zlib-ng}; do
+  for submodule in Externals/{cpp-ipc/cpp-ipc,cpp-optparse/cpp-optparse,cubeb/cubeb,imgui/imgui,implot/implot,fmt/fmt,mGBA/mgba,minizip-ng/minizip-ng,rcheevos/rcheevos,spirv_cross/SPIRV-Cross,tinygltf/tinygltf,VulkanMemoryAllocator,watcher,zlib-ng/zlib-ng}; do
     git submodule init ${submodule}
     git config submodule.${submodule}.url ../${submodule##*/}
     git -c protocol.file.allow=always submodule update ${submodule}
