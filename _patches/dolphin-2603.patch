@@ -1,0 +1,31 @@
+diff --git a/dolphin-emu/PKGBUILD b/dolphin-emu/PKGBUILD
+index e2e05b8e7..98a0a576e 100644
+--- a/dolphin-emu/PKGBUILD
++++ b/dolphin-emu/PKGBUILD
+@@ -7,7 +7,7 @@ pkgname=(
+   dolphin-emu
+   dolphin-emu-tool
+ )
+-pkgver=2512
++pkgver=2603
+ pkgrel=1
+ epoch=1
+ pkgdesc='A Gamecube and Wii emulator'
+@@ -62,7 +62,7 @@ makedepends=(
+ )
+ optdepends=('pulseaudio: PulseAudio backend')
+ options=(!emptydirs !lto)
+-_tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
++_tag=d8558142ead21b3fa39809c4aedb982fbfc85feb
+ source=(
+   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
+   git+https://github.com/mutouyun/cpp-ipc.git
+@@ -81,7 +81,7 @@ source=(
+   git+https://github.com/e-dant/watcher.git
+   git+https://github.com/zlib-ng/zlib-ng.git
+ )
+-b2sums=('290af3a2d6825ccb17578e6c6105cdf29b8708a8dd59982693d1c5bbc56f06f4d82a069d8615a1a55908f7dbc1e460f7b43f883ad96381ee13ca9c7448caad47'
++b2sums=('SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
