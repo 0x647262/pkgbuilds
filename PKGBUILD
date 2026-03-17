@@ -58,15 +58,18 @@ sha512sums=('c5b5f441f1dd73e0d855c52c7e07b3787dc87d0a2590c1c5e9746a0d2adc9bd69ed
             '3c6ee1e4646d09c164a2212f9e4d2f53158ff32911b0972e060a395a8d4685334574a7ede995a81680dcc0750cd3327a78beb7904a4bb326b2399d79a8b12d5e')
 
 build() {
-  cd ${pkgname}
-  cmake \
-    -B build \
-    -G Ninja \
-    -D CMAKE_BUILD_TYPE=RelWithDebInfo \
-    -D CMAKE_INSTALL_PREFIX=/usr \
-    -D USE_BUNDLED=OFF \
-    -D ENABLE_TRANSLATIONS=ON \
+  local cmake_options=(
+    -B build
+    -G Ninja
+    -D CMAKE_BUILD_TYPE=RelWithDebInfo
+    -D CMAKE_INSTALL_PREFIX=/usr
+    -D USE_BUNDLED=OFF
+    -D ENABLE_TRANSLATIONS=ON
     -W no-dev
+  )
+
+  cd ${pkgname}
+  cmake "${cmake_options[@]}"
   cmake --build build --verbose
 }
 
