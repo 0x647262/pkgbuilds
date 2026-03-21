@@ -1,22 +1,24 @@
 diff --git a/dolphin-emu/PKGBUILD b/dolphin-emu/PKGBUILD
-index e2e05b8e7..98a0a576e 100644
+index eed8f73..77517df 100644
 --- a/dolphin-emu/PKGBUILD
 +++ b/dolphin-emu/PKGBUILD
-@@ -7,7 +7,7 @@ pkgname=(
+@@ -7,8 +7,8 @@ pkgname=(
    dolphin-emu
    dolphin-emu-tool
  )
 -pkgver=2512
+-pkgrel=1
 +pkgver=2603
- pkgrel=1
++pkgrel=94
  epoch=1
  pkgdesc='A Gamecube and Wii emulator'
+ arch=(x86_64)
 @@ -62,7 +62,7 @@ makedepends=(
  )
  optdepends=('pulseaudio: PulseAudio backend')
  options=(!emptydirs !lto)
 -_tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
-+_tag=d8558142ead21b3fa39809c4aedb982fbfc85feb
++_tag=0e92a147036fa9ab8a953b40723f43142c2e5d7b
  source=(
    dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
    git+https://github.com/mutouyun/cpp-ipc.git
@@ -29,3 +31,24 @@ index e2e05b8e7..98a0a576e 100644
          'SKIP'
          'SKIP'
          'SKIP'
+@@ -111,11 +111,6 @@ prepare() {
+   git -c protocol.file.allow=always submodule update cmake/sanitizers-cmake
+ }
+ 
+-pkgver() {
+-  cd dolphin-emu
+-  git describe --tags
+-}
+-
+ build() {
+   cmake -S dolphin-emu -B build -G Ninja \
+     -DCMAKE_BUILD_TYPE=None \
+@@ -127,7 +122,7 @@ build() {
+     -DENABLE_AUTOUPDATE=OFF \
+     -DENABLE_LTO=OFF \
+     -DENABLE_TESTS=OFF \
+-    -DUSE_MGBA=ON \
++    -DUSE_MGBA=OFF \
+     -Wno-dev
+   cmake --build build
+ }
