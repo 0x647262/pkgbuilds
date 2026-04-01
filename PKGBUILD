@@ -24,7 +24,7 @@ pkgname=(
   lib32-vulkan-mesa-implicit-layers
   lib32-vulkan-mesa-layers
 )
-pkgver=26.0.3
+pkgver=26.0.4
 _pkgver=${pkgver/[a-z]/-&}
 pkgrel=1
 epoch=1
@@ -150,7 +150,7 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-b2sums=('348df0a426c9e41565bf63c116d2a9b6b7e76b8d4310facfb0ba04f4d6da40942a7e622f25451f91d9e08722ad1f512eefb8ddbc6aefb6a82e5ab1e87e291ee5'
+b2sums=('f83f98bae3c06f893c551e9d33cc2b655b8b74e8f5a54db0ce4cebec1451ef0fc66263b006a2c205ef2c491da831ae037cacb09fa5364cfd2d95a6ae7b77048f'
         'SKIP'
         'cc21d419a6f60c13cb0da7e3ec0cc741759e3c17afc79b0d8def35159e8584ed94580afac83ab5fbba6158c7eb1999470a4650bfc532bd4343be2166d85aa571'
         '431439d31632d177aeb15f910b4f546efa76d54fc74fc8e140399dc5e54eca33fd606f11dbfb48fa83067c8474ee512e62751895d5948367b65ab08b984284e5'
@@ -184,7 +184,7 @@ b2sums=('348df0a426c9e41565bf63c116d2a9b6b7e76b8d4310facfb0ba04f4d6da40942a7e622
         '93385f64103fdb482bec34c7912474ae7a5935948715e6eb9a54907e0db5c39f089f6cd393bab33c935c59a1bbb0f4099431f206343811c1a450554d96a35756')
 
 # https://docs.mesa3d.org/relnotes.html
-sha256sums=('ddb7443d328e89aa45b4b6b80f077bf937f099daeca8ba48cabe32aab769e134'
+sha256sums=('6d91541e086f29bb003602d2c81070f2be4c0693a90b181ca91e46fa3953fe78'
             'SKIP'
             '46191b06854b253fac666fb201063a42c1c793a5eb9ae88614b743291e076d2e'
             '67914ab451f3bfd2e69e5e9d2ef3858484e7074d63f204fd166ec391b54de21d'
@@ -239,8 +239,10 @@ prepare() {
 build() {
   local meson_options=(
     --cross-file lib32
+    -D amdgpu-virtio=true
     -D android-libbacktrace=disabled
     -D b_ndebug=true
+    -D freedreno-kmds=msm,virtio
     -D gallium-drivers=all
     -D gallium-extra-hud=true
     -D gallium-mediafoundation=disabled
