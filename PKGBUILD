@@ -248,8 +248,10 @@ prepare() {
 
 build() {
   local meson_options=(
+    -D amdgpu-virtio=true
     -D android-libbacktrace=disabled
     -D b_ndebug=true
+    -D freedreno-kmds=msm,virtio
     -D gallium-drivers=all
     -D gallium-extra-hud=true
     -D gallium-mediafoundation=disabled
