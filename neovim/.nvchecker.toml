@@ -1,0 +1,4 @@
+[neovim]
+source = "git"
+git = "https://github.com/neovim/neovim.git"
+prefix = "v"

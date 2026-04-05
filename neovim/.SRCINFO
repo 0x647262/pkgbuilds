@@ -1,0 +1,46 @@
+pkgbase = neovim
+	pkgdesc = Fork of Vim aiming to improve user experience, plugins, and GUIs
+	pkgver = 0.12.0
+	pkgrel = 3
+	url = https://neovim.io
+	arch = x86_64
+	license = Apache-2.0
+	license = LicenseRef-vim
+	makedepends = cmake
+	makedepends = git
+	makedepends = ninja
+	makedepends = lua51-mpack
+	depends = glibc
+	depends = libgcc
+	depends = libluv
+	depends = libtree-sitter.so
+	depends = libunibilium.so
+	depends = libutf8proc
+	depends = libuv
+	depends = libvterm>=0.3.3
+	depends = lua51-lpeg
+	depends = luajit
+	depends = msgpack-c
+	depends = tree-sitter
+	depends = tree-sitter-c
+	depends = tree-sitter-lua
+	depends = tree-sitter-markdown
+	depends = tree-sitter-query
+	depends = tree-sitter-vim
+	depends = tree-sitter-vimdoc
+	depends = unibilium
+	optdepends = python-pynvim: for Python plugin support (see :help python)
+	optdepends = xclip: for clipboard support on X11 (or xsel) (see :help clipboard)
+	optdepends = xsel: for clipboard support on X11 (or xclip) (see :help clipboard)
+	optdepends = wl-clipboard: for clipboard support on wayland (see :help clipboard)
+	provides = nvim
+	provides = vim-plugin-runtime
+	backup = etc/xdg/nvim/sysinit.vim
+	source = git+https://github.com/neovim/neovim.git#tag=v0.12.0
+	source = nvimdoc
+	source = nvimdoc.hook
+	sha512sums = 80a9c3fce5354db12f1a2010a800f8bc5709f18051cd7b115acf836340eda2819055896c55f016eed9155db0d62f2d66f6ed2b708c5cd0560963d8e371a110b6
+	sha512sums = 22662462c823de243599cdd3483e46ade4ab59b219e907468d34c18e584fe7477548e357ee2ce56bb098cf54b770b108a3511703dd486f0774a65c84af78f6aa
+	sha512sums = 3c6ee1e4646d09c164a2212f9e4d2f53158ff32911b0972e060a395a8d4685334574a7ede995a81680dcc0750cd3327a78beb7904a4bb326b2399d79a8b12d5e
+
+pkgname = neovim
