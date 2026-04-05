@@ -1,64 +1,5 @@
-diff --git a/_patches/dolphin-2603.patch b/_patches/dolphin-2603.patch
-index f2bc60c..e69de29 100644
---- a/_patches/dolphin-2603.patch
-+++ b/_patches/dolphin-2603.patch
-@@ -1,54 +0,0 @@
--diff --git a/dolphin-emu/PKGBUILD b/dolphin-emu/PKGBUILD
--index eed8f73..77517df 100644
----- a/dolphin-emu/PKGBUILD
--+++ b/dolphin-emu/PKGBUILD
--@@ -7,8 +7,8 @@ pkgname=(
--   dolphin-emu
--   dolphin-emu-tool
-- )
---pkgver=2512
---pkgrel=1
--+pkgver=2603
--+pkgrel=94
-- epoch=1
-- pkgdesc='A Gamecube and Wii emulator'
-- arch=(x86_64)
--@@ -62,7 +62,7 @@ makedepends=(
-- )
-- optdepends=('pulseaudio: PulseAudio backend')
-- options=(!emptydirs !lto)
---_tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
--+_tag=0e92a147036fa9ab8a953b40723f43142c2e5d7b
-- source=(
--   dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
--   git+https://github.com/mutouyun/cpp-ipc.git
--@@ -81,7 +81,7 @@ source=(
--   git+https://github.com/e-dant/watcher.git
--   git+https://github.com/zlib-ng/zlib-ng.git
-- )
---b2sums=('290af3a2d6825ccb17578e6c6105cdf29b8708a8dd59982693d1c5bbc56f06f4d82a069d8615a1a55908f7dbc1e460f7b43f883ad96381ee13ca9c7448caad47'
--+b2sums=('SKIP'
--         'SKIP'
--         'SKIP'
--         'SKIP'
--@@ -111,11 +111,6 @@ prepare() {
--   git -c protocol.file.allow=always submodule update cmake/sanitizers-cmake
-- }
-- 
---pkgver() {
---  cd dolphin-emu
---  git describe --tags
---}
---
-- build() {
--   cmake -S dolphin-emu -B build -G Ninja \
--     -DCMAKE_BUILD_TYPE=None \
--@@ -127,7 +122,7 @@ build() {
--     -DENABLE_AUTOUPDATE=OFF \
--     -DENABLE_LTO=OFF \
--     -DENABLE_TESTS=OFF \
---    -DUSE_MGBA=ON \
--+    -DUSE_MGBA=OFF \
--     -Wno-dev
--   cmake --build build
-- }
 diff --git a/dolphin-emu/.SRCINFO b/dolphin-emu/.SRCINFO
-index bc5131f..ab09e65 100644
+index bc5131fc..50c7fa3d 100644
 --- a/dolphin-emu/.SRCINFO
 +++ b/dolphin-emu/.SRCINFO
 @@ -1,7 +1,7 @@
@@ -67,7 +8,7 @@ index bc5131f..ab09e65 100644
 -	pkgver = 2512
 -	pkgrel = 1
 +	pkgver = 2603
-+	pkgrel = 144
++	pkgrel = 227
  	epoch = 1
  	url = https://dolphin-emu.org
  	arch = x86_64
@@ -76,7 +17,7 @@ index bc5131f..ab09e65 100644
  	options = !emptydirs
  	options = !lto
 -	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
-+	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=932769c4e21052257c6014267ab32c2abb4f4290
++	source = dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=1ee93df28762076c1a23e9a2a3a2bce983ecad89
  	source = git+https://github.com/mutouyun/cpp-ipc.git
  	source = git+https://github.com/weisslj/cpp-optparse.git
  	source = git+https://github.com/mozilla/cubeb.git
@@ -90,7 +31,7 @@ index bc5131f..ab09e65 100644
  	b2sums = SKIP
  	b2sums = SKIP
 diff --git a/dolphin-emu/PKGBUILD b/dolphin-emu/PKGBUILD
-index eed8f73..8185854 100644
+index eed8f733..a369e667 100644
 --- a/dolphin-emu/PKGBUILD
 +++ b/dolphin-emu/PKGBUILD
 @@ -7,8 +7,8 @@ pkgname=(
@@ -100,7 +41,7 @@ index eed8f73..8185854 100644
 -pkgver=2512
 -pkgrel=1
 +pkgver=2603
-+pkgrel=144
++pkgrel=227
  epoch=1
  pkgdesc='A Gamecube and Wii emulator'
  arch=(x86_64)
@@ -109,7 +50,7 @@ index eed8f73..8185854 100644
  optdepends=('pulseaudio: PulseAudio backend')
  options=(!emptydirs !lto)
 -_tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
-+_tag=932769c4e21052257c6014267ab32c2abb4f4290
++_tag=1ee93df28762076c1a23e9a2a3a2bce983ecad89
  source=(
    dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
    git+https://github.com/mutouyun/cpp-ipc.git
