@@ -1,5 +1,5 @@
 diff --git a/mesa/PKGBUILD b/mesa/PKGBUILD
-index 1f1dc9442..dbfe3b104 100644
+index 75142a3f..a2ee1167 100644
 --- a/mesa/PKGBUILD
 +++ b/mesa/PKGBUILD
 @@ -8,16 +8,6 @@ pkgbase=mesa
@@ -19,10 +19,10 @@ index 1f1dc9442..dbfe3b104 100644
    vulkan-radeon
    vulkan-swrast
    vulkan-virtio
-@@ -250,10 +240,10 @@ build() {
-   local meson_options=(
+@@ -252,10 +242,10 @@ build() {
      -D android-libbacktrace=disabled
      -D b_ndebug=true
+     -D freedreno-kmds=msm,virtio
 -    -D gallium-drivers=all
 +    -D gallium-drivers=radeonsi
      -D gallium-extra-hud=true
@@ -32,7 +32,7 @@ index 1f1dc9442..dbfe3b104 100644
      -D gallium-rusticl=true
      -D gles1=disabled
      -D html-docs=enabled
-@@ -263,7 +253,7 @@ build() {
+@@ -265,7 +255,7 @@ build() {
      -D sysprof=true
      -D valgrind=enabled
      -D video-codecs=all
@@ -41,7 +41,7 @@ index 1f1dc9442..dbfe3b104 100644
      -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,anti-lag,vram-report-limit
      -D vulkan-manifest-per-architecture=false
    )
-@@ -336,38 +326,6 @@ package_mesa() {
+@@ -338,38 +328,6 @@ package_mesa() {
      _pick opencl $libdir/libRusticlOpenCL*
      _pick opencl etc/OpenCL/vendors/rusticl.icd
  
@@ -80,7 +80,7 @@ index 1f1dc9442..dbfe3b104 100644
      _pick vkradeon $libdir/libvulkan_radeon.so
      _pick vkradeon usr/share/drirc.d/00-radv-defaults.conf
      _pick vkradeon usr/share/vulkan/icd.d/radeon_icd.json
-@@ -429,293 +387,6 @@ package_opencl-mesa() {
+@@ -431,293 +389,6 @@ package_opencl-mesa() {
    install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
  }
  
