@@ -1,5 +1,5 @@
 diff --git a/lib32-mesa/PKGBUILD b/lib32-mesa/PKGBUILD
-index 7ed90d7b0..1449b46bf 100644
+index 1a6f6c5b..4342d350 100644
 --- a/lib32-mesa/PKGBUILD
 +++ b/lib32-mesa/PKGBUILD
 @@ -8,16 +8,6 @@ pkgbase=lib32-mesa
@@ -19,10 +19,10 @@ index 7ed90d7b0..1449b46bf 100644
    lib32-vulkan-radeon
    lib32-vulkan-swrast
    lib32-vulkan-virtio
-@@ -241,10 +231,10 @@ build() {
-     --cross-file lib32
+@@ -243,10 +233,10 @@ build() {
      -D android-libbacktrace=disabled
      -D b_ndebug=true
+     -D freedreno-kmds=msm,virtio
 -    -D gallium-drivers=all
 +    -D gallium-drivers=radeonsi
      -D gallium-extra-hud=true
@@ -32,7 +32,7 @@ index 7ed90d7b0..1449b46bf 100644
      -D gallium-rusticl=true
      -D gles1=disabled
      -D html-docs=disabled
-@@ -254,7 +244,7 @@ build() {
+@@ -256,7 +246,7 @@ build() {
      -D sysprof=false
      -D valgrind=disabled
      -D video-codecs=all
@@ -41,7 +41,7 @@ index 7ed90d7b0..1449b46bf 100644
      -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,anti-lag,vram-report-limit
      -D vulkan-manifest-per-architecture=false
    )
-@@ -327,27 +317,6 @@ package_lib32-mesa() {
+@@ -329,27 +319,6 @@ package_lib32-mesa() {
  
      _pick opencl $libdir/libRusticlOpenCL*
  
@@ -69,7 +69,7 @@ index 7ed90d7b0..1449b46bf 100644
      _pick vkradeon $libdir/libvulkan_radeon.so
  
      _pick vkswrast $libdir/libvulkan_lvp.so
-@@ -401,303 +370,6 @@ package_lib32-opencl-mesa() {
+@@ -403,303 +372,6 @@ package_lib32-opencl-mesa() {
    install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
  }
  
