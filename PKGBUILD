@@ -7,8 +7,9 @@ pkgname=(
   dolphin-emu
   dolphin-emu-tool
 )
-pkgver=2512
-pkgrel=2
+pkgver=2603.1
+_gittag=2603a
+pkgrel=1
 epoch=1
 pkgdesc='A Gamecube and Wii emulator'
 arch=(x86_64)
@@ -18,18 +19,20 @@ depends=(
   bluez-libs
   bzip2
   enet
-  gcc-libs
   glibc
+  glslang
   hidapi
   libavcodec.so
   libavformat.so
   libavutil.so
   libcurl.so
   #libfmt.so
+  libgcc
   libgl
   libsfml-network.so
   libsfml-system.so
   libspng.so
+  libstdc++
   libswscale.so
   libusb-1.0.so
   libx11
@@ -39,10 +42,12 @@ depends=(
   lzo
   mbedtls2
   pugixml
-  sdl2
+  sdl3
   speexdsp
   xxhash
   xz
+  zlib
+  zlib-ng
   zstd
 )
 makedepends=(
@@ -62,9 +67,8 @@ makedepends=(
 )
 optdepends=('pulseaudio: PulseAudio backend')
 options=(!emptydirs !lto)
-_tag=2614969fa80dfeb87d2a4ad3bdaa703237127074
 source=(
-  dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_tag}
+  dolphin-emu::git+https://github.com/dolphin-emu/dolphin.git#tag=${_gittag}
   git+https://github.com/mutouyun/cpp-ipc.git
   git+https://github.com/weisslj/cpp-optparse.git
   git+https://github.com/mozilla/cubeb.git
@@ -81,7 +85,7 @@ source=(
   git+https://github.com/e-dant/watcher.git
   git+https://github.com/zlib-ng/zlib-ng.git
 )
-b2sums=('290af3a2d6825ccb17578e6c6105cdf29b8708a8dd59982693d1c5bbc56f06f4d82a069d8615a1a55908f7dbc1e460f7b43f883ad96381ee13ca9c7448caad47'
+b2sums=('8e43c8c34c355a36fea357307a01423a549ce43d2dadf4b782166fe9c62faa9de49798f59d386a599ce964cb8b063a0e5977c218124cfc2345b33776324dcfdb'
         'SKIP'
         'SKIP'
         'SKIP'
@@ -109,11 +113,6 @@ prepare() {
   git submodule init cmake/sanitizers-cmake
   git config submodule.cmake/sanitizers-cmake.url "${srcdir}"/sanitizers-cmake
   git -c protocol.file.allow=always submodule update cmake/sanitizers-cmake
-}
-
-pkgver() {
-  cd dolphin-emu
-  git describe --tags
 }
 
 build() {
