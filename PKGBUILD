@@ -14,7 +14,6 @@ pkgname=(
   vulkan-freedreno
   vulkan-gfxstream
   vulkan-intel
-  vulkan-kosmickrisp
   vulkan-nouveau
   vulkan-panfrost
   vulkan-powervr
@@ -100,9 +99,6 @@ options=(
 )
 source=(
   "https://archive.mesa3d.org/mesa-$_pkgver.tar.xz"{,.sig}
-
-  # Fix build on i686
-  0001-kk-Fix-debug-printf-specifier.patch
 )
 validpgpkeys=(
   946D09B5E4C9845E63075FF1D961C596A7203456 # Andres Gomez <tanty@igalia.com>
@@ -162,7 +158,6 @@ done
 
 b2sums=('594e0737ff10853eac91a45c81db8738874e2d4f61ca2f02229bf62df9d3c133c4e1b605d90c17d17d91df97b78bfdb8051a6e1927b8d7759e4528de0a939f02'
         'SKIP'
-        'cc21d419a6f60c13cb0da7e3ec0cc741759e3c17afc79b0d8def35159e8584ed94580afac83ab5fbba6158c7eb1999470a4650bfc532bd4343be2166d85aa571'
         '431439d31632d177aeb15f910b4f546efa76d54fc74fc8e140399dc5e54eca33fd606f11dbfb48fa83067c8474ee512e62751895d5948367b65ab08b984284e5'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9a73962e1e38b84131ab2350b69a1f5d611c549533eec73e898c394a9b9442f357bb5d5f59e1be12270dd29bdf237dc2d21786c0c2210736e224ef5d48300dcf'
@@ -196,7 +191,6 @@ b2sums=('594e0737ff10853eac91a45c81db8738874e2d4f61ca2f02229bf62df9d3c133c4e1b60
 # https://docs.mesa3d.org/relnotes.html
 sha256sums=('d229c9937d9a25ca0a8958c59f425174563d300ec42acbea2dbe84a055023368'
             'SKIP'
-            '46191b06854b253fac666fb201063a42c1c793a5eb9ae88614b743291e076d2e'
             '67914ab451f3bfd2e69e5e9d2ef3858484e7074d63f204fd166ec391b54de21d'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             '7f9f832470494906d1fca5329f8ab5791cc60beb230c74815dff541cbd2b5ca0'
@@ -265,7 +259,7 @@ build() {
     -D sysprof=true
     -D valgrind=enabled
     -D video-codecs=all
-    -D vulkan-drivers=all
+    -D vulkan-drivers=amd,intel,intel_hasvk,swrast,freedreno,panfrost,virtio,broadcom,imagination,microsoft-experimental,nouveau,asahi,gfxstream
     -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,anti-lag,vram-report-limit
     -D vulkan-manifest-per-architecture=false
   )
@@ -357,9 +351,6 @@ package_mesa() {
 
     _pick vkintel $libdir/libvulkan_intel{,_hasvk}.so
     _pick vkintel usr/share/vulkan/icd.d/intel{,_hasvk}_icd.json
-
-    _pick vkkosmic $libdir/libvulkan_kosmickrisp.so
-    _pick vkkosmic usr/share/vulkan/icd.d/kosmickrisp_mesa_icd.json
 
     _pick vknvidia $libdir/libvulkan_nouveau.so
     _pick vknvidia usr/share/vulkan/icd.d/nouveau_icd.json
@@ -598,35 +589,6 @@ package_vulkan-intel() {
   provides=(vulkan-driver)
 
   mv vkintel/* "$pkgdir"
-
-  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
-}
-
-package_vulkan-kosmickrisp() {
-  pkgdesc="Open-source Vulkan driver for Metal"
-  depends=(
-    expat
-    glibc
-    libdisplay-info
-    libdrm
-    libgcc
-    libstdc++
-    libx11
-    libxcb
-    libxshmfence
-    spirv-tools
-    systemd-libs
-    vulkan-icd-loader
-    vulkan-mesa-implicit-layers
-    wayland
-    xcb-util-keysyms
-    zlib
-    zstd
-  )
-  optdepends=("vulkan-mesa-layers: additional vulkan layers")
-  provides=(vulkan-driver)
-
-  mv vkkosmic/* "$pkgdir"
 
   install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
