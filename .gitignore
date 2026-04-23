@@ -1,4 +1,9 @@
 *.pkg.tar.zst
+*.gz
+*.orig
+*.rej
+*.sig
+*.xz
 
 */pkg/
 */src/

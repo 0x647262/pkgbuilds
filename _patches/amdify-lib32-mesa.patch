@@ -1,8 +1,8 @@
 diff --git a/lib32-mesa/PKGBUILD b/lib32-mesa/PKGBUILD
-index 1a6f6c5b..4342d350 100644
+index 6067764..c919d1d 100644
 --- a/lib32-mesa/PKGBUILD
 +++ b/lib32-mesa/PKGBUILD
-@@ -8,16 +8,6 @@ pkgbase=lib32-mesa
+@@ -8,15 +8,6 @@ pkgbase=lib32-mesa
  pkgname=(
    lib32-mesa
    lib32-opencl-mesa
@@ -12,14 +12,13 @@ index 1a6f6c5b..4342d350 100644
 -  lib32-vulkan-freedreno
 -  lib32-vulkan-gfxstream
 -  lib32-vulkan-intel
--  lib32-vulkan-kosmickrisp
 -  lib32-vulkan-nouveau
 -  lib32-vulkan-panfrost
 -  lib32-vulkan-powervr
    lib32-vulkan-radeon
    lib32-vulkan-swrast
    lib32-vulkan-virtio
-@@ -243,10 +233,10 @@ build() {
+@@ -237,10 +228,10 @@ build() {
      -D android-libbacktrace=disabled
      -D b_ndebug=true
      -D freedreno-kmds=msm,virtio
@@ -32,16 +31,16 @@ index 1a6f6c5b..4342d350 100644
      -D gallium-rusticl=true
      -D gles1=disabled
      -D html-docs=disabled
-@@ -256,7 +246,7 @@ build() {
+@@ -250,7 +241,7 @@ build() {
      -D sysprof=false
      -D valgrind=disabled
      -D video-codecs=all
--    -D vulkan-drivers=all
+-    -D vulkan-drivers=amd,intel,intel_hasvk,swrast,freedreno,panfrost,virtio,broadcom,imagination,microsoft-experimental,nouveau,asahi,gfxstream
 +    -D vulkan-drivers=amd,swrast,virtio
      -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,anti-lag,vram-report-limit
      -D vulkan-manifest-per-architecture=false
    )
-@@ -329,27 +319,6 @@ package_lib32-mesa() {
+@@ -323,25 +314,6 @@ package_lib32-mesa() {
  
      _pick opencl $libdir/libRusticlOpenCL*
  
@@ -58,8 +57,6 @@ index 1a6f6c5b..4342d350 100644
 -
 -    _pick vkintel $libdir/libvulkan_intel{,_hasvk}.so
 -
--    _pick vkkosmic $libdir/libvulkan_kosmickrisp.so
--
 -    _pick vknvidia $libdir/libvulkan_nouveau.so
 -
 -    _pick vkpfrost $libdir/libvulkan_panfrost.so
@@ -69,7 +66,7 @@ index 1a6f6c5b..4342d350 100644
      _pick vkradeon $libdir/libvulkan_radeon.so
  
      _pick vkswrast $libdir/libvulkan_lvp.so
-@@ -403,303 +372,6 @@ package_lib32-opencl-mesa() {
+@@ -395,273 +367,6 @@ package_lib32-opencl-mesa() {
    install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
  }
  
@@ -246,36 +243,6 @@ index 1a6f6c5b..4342d350 100644
 -  provides=(lib32-vulkan-driver)
 -
 -  mv vkintel/* "$pkgdir"
--
--  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
--}
--
--package_lib32-vulkan-kosmickrisp() {
--  pkgdesc="Open-source Vulkan driver for Metal - 32-bit"
--  depends=(
--    lib32-expat
--    lib32-gcc-libs
--    lib32-glibc
--    lib32-libdisplay-info
--    lib32-libdrm
--    lib32-libx11
--    lib32-libxcb
--    lib32-libxshmfence
--    lib32-spirv-tools
--    lib32-systemd
--    lib32-vulkan-icd-loader
--    lib32-vulkan-mesa-implicit-layers
--    lib32-wayland
--    lib32-xcb-util-keysyms
--    lib32-zlib
--    lib32-zstd
--
--    vulkan-kosmickrisp
--  )
--  optdepends=("lib32-vulkan-mesa-layers: additional vulkan layers")
--  provides=(lib32-vulkan-driver)
--
--  mv vkkosmic/* "$pkgdir"
 -
 -  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 -}
